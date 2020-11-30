@@ -3,3 +3,6 @@
 
 ## Dependencies Installed:
 > express, express-validator, brcyptjs, config, jsonwebtoken, mongoose
+
+## Dev dependencies:
+> nodemon
