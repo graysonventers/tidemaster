@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 // Define Routes
 // Register and Login User Routes
 app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
 
 
 app.listen(port, () => {
