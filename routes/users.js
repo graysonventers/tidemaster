@@ -3,13 +3,24 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const { body, validationResult } = require('express-validator');
 
+const auth = require('../middleware/auth');
 const User = require('../models/User');
 
 // @route   POST /api/users
 // @desc    Register a user
 // @access  Public
-router.post('/', async (req, res) => {
+router.post('/', [
+    body('name', 'Please include a name').not().isEmpty(),
+    body('email', 'Email is required').isEmail().not().isEmpty(),
+    body('password', 'Password is required').isLength({ min: 6 })
+], async (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     const { name, email, password } = req.body;
 
@@ -55,45 +66,18 @@ router.post('/', async (req, res) => {
     }
 });
 
+// @route   PUT /api/users
+// @desc    Add favorites to User model
+// @access  Private
 
-// @route   GET user
-// @desc    Login a user
-// @access  Public
-router.get('/', async (req, res) => {
-    const { email, password } = req.body;
+router.put('/', auth, async (req, res) => {
 
     try {
-        // Check if user exists
-        const user = await User.findOne({email});
-
-        // If user doesn't exist
-        if (!user) {
-            res.status(400).json({ message: "User does not exist"})
-        }
-
-        // 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            res.status(400).json({ message: "Incorrect password"})
-        }
-
-        // create payload for JWT
-        const payload = {
-            user: {
-                id: user.id
-            }
-        };
-
-        // create token and send with results at json
-        jwt.sign(
-            payload,
-            config.get('jwtSecret'),
-            {expiresIn: '1 day'},
-            function(err, token) {
-                if (err) throw err;
-                res.json({ token })
-            }
-        );
+        let user = await User.findById(req.user.id);
+        user.favoriteSpots.push(req.body.favoriteSpots);
+        user.save();
+        
+        res.send('Favorite Spot added');
 
     } catch (err) {
         console.error(err.message);
