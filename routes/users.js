@@ -8,6 +8,11 @@ const { body, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
 const User = require('../models/User');
 
+// ROUTES WITHIN HERE:
+    // Register User
+    // Add favoriteSpot to user model
+    // Remove favoriteSpot from user model
+
 // @route   POST /api/users
 // @desc    Register a user
 // @access  Public
@@ -74,10 +79,34 @@ router.put('/', auth, async (req, res) => {
 
     try {
         let user = await User.findById(req.user.id);
+
+        if (user.favoriteSpots.includes(req.body.favoriteSpots)) return res.send('Already saved as a favorite spot');
+
         user.favoriteSpots.push(req.body.favoriteSpots);
-        user.save();
+        await user.save();
         
-        res.send('Favorite Spot added');
+        res.json(user);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send(err.message);
+    }
+});
+
+// @route   DELETE /api/users
+// @desc    Delete favoriteSpot from User model
+// @access  Private
+
+router.delete('/', auth, async (req, res) => {
+
+    try {
+        let user = await User.findById(req.user.id);
+
+        user.favoriteSpots = user.favoriteSpots.filter(favoriteSpot => favoriteSpot !== req.body.favoriteSpots);
+
+        await user.save();
+        
+        res.send('Favorite Spot Deleted');
 
     } catch (err) {
         console.error(err.message);
