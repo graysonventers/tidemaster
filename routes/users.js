@@ -75,6 +75,8 @@ router.post('/', [
 // @desc    Add favorites to User model
 // @access  Private
 
+// Notes: must send data to server as "favoriteSpots": "spot"
+
 router.put('/', auth, async (req, res) => {
 
     try {
@@ -96,6 +98,8 @@ router.put('/', auth, async (req, res) => {
 // @route   DELETE /api/users
 // @desc    Delete favoriteSpot from User model
 // @access  Private
+
+// Notes: must send data to server as "favoriteSpots": "spot"
 
 router.delete('/', auth, async (req, res) => {
 

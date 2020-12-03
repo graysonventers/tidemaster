@@ -63,7 +63,7 @@ router.post('/', [
 });
 
 //  @route      GET /api/auth
-//  @desc       get logged in user and token
+//  @desc       get logged in user by token
 //  @access     private
 router.get('/', auth, async (req, res) => {
     try {
