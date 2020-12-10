@@ -24,50 +24,38 @@ const Dashboard = () => {
                 </div> */}
                 
             {/* if user DOES have favorite spots */}
-            <div className="container" style={{ paddingTop: '10px' }}>
+            <div className="container" style={{ paddingTop: '5%', paddingBottom: '5%' }}>
                 <a href="#surfspot">
-                    <div className="card black-text center valign-wrapper" style={{ opacity: '80%' }}>
-                        <div className="container">
-                        <div className="row">
-                                <div className="col s3"><h5>Trails</h5></div>
-                                <div className="col s3">3-4ft</div>
-                                <div className="col s3">Fair to Good</div>
-                                <div className="col s3">
-                                    <button>
-                                        <i className="material-icons tiny">clear</i>
-                                    </button>
-                                </div>
+                    <div className="card hoverable black-text center" style={{ opacity: '80%', height: '80px', verticalAlign: 'middle' }}>
+                        
+                        <div className="row" style={{ height: '100%' }}>
+                            <div style={{ marginTop: '14px', fontSize: '35px' }} className="col s3">Trails</div>
+                            <div style={{ marginTop: '25px', fontSize: '20px' }} className="col s3">3-4 ft</div>
+                            <div style={{ marginTop: '25px', fontSize: '20px' }} className="col s4">Fair to Good</div>
+                            <div style={{ marginTop: '25px' }} className="col s1 offset-s1">
+                                <a href="#deleteSurfSpot" style={{ color: '#ee6e73' }}>
+                                    <i className="material-icons small">clear</i>
+                                </a>
                             </div>
                         </div>
-                            
                     </div>
                 </a>
-                
-                <div className="card horizontal">
-                    <div className="card-content">
-                        <h5>Staircase</h5>
-                    </div>
-                </div>
-                <div className="card horizontal">
-                    <div className="card-content">
-                        <h5>Shitpipe</h5>
+                <a href="#surfspot">
+                    <div className="card hoverable black-text center" style={{ opacity: '80%', height: '80px', verticalAlign: 'middle' }}>
                         
+                        <div className="row" style={{ height: '100%' }}>
+                            <div style={{ marginTop: '14px', fontSize: '35px' }} className="col s3">Staircase</div>
+                            <div style={{ marginTop: '25px', fontSize: '20px' }} className="col s3">2-3 ft</div>
+                            <div style={{ marginTop: '25px', fontSize: '20px' }} className="col s4">Poor to Fair</div>
+                            <div style={{ marginTop: '25px' }} className="col s1 offset-s1">
+                                <a href="#deleteSurfSpot" style={{ color: '#ee6e73' }}>
+                                    <i className="material-icons small">clear</i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className="card horizontal">
-                    <div className="card-content">
-                        <h5>El Porto</h5>
-                    </div>
-                </div>
+                </a>
             </div>
-            
-                
-                
-            
-            
-
-
-            
         </div>
     )
 };
