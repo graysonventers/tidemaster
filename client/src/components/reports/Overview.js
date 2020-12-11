@@ -5,7 +5,8 @@ const Overview = () => {
         <Fragment>
             <div className="card">
                     <div className="card-content center">
-                        <div className="row">
+                        <span>Overview</span>
+                        <div className="row section">
                             <span className="col s2">Wave Height</span>
                             <span className="col s3">Rating</span>
                             <span className="col s2">Tide</span>
