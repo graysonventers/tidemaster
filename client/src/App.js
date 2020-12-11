@@ -5,18 +5,20 @@ import Landing from './components/layout/Landing';
 import Dashboard from './components/layout/Dashboard';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Report from './components/reports/Report';
 
 function App() {
   return (
     <div>
       <Navbar />
-      {/* <Dashboard /> */}
-      {/* <Landing /> */}
-      {/* <Register /> */}
-      <Login />
+      {/* <Landing />
+      <Dashboard />
+      <Register />
+      <Login /> */}
+      <Report />
       <Footer />
     </div>
-  );
-}
+  )
+};
 
 export default App;
