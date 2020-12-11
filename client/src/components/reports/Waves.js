@@ -4,7 +4,7 @@ const Waves = () => {
     const waveHeightStyle = {
         marginLeft: '2%',
         marginRight: '2%'
-    }
+    };
 
     return (
         <Fragment>

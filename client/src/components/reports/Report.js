@@ -2,6 +2,7 @@ import React from 'react';
 import Overview from '../reports/Overview';
 import Waves from '../reports/Waves';
 import Swell from '../reports/Swell';
+import Wind from '../reports/Wind';
 
 const Report = () => {
     const dayBtnStyle = { 
@@ -28,7 +29,7 @@ const Report = () => {
                 <Overview />
                 <Waves />
                 <Swell />
-                
+                <Wind />
                 
             </div>
 
