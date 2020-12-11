@@ -3,6 +3,7 @@ import Overview from '../reports/Overview';
 import Waves from '../reports/Waves';
 import Swell from '../reports/Swell';
 import Wind from '../reports/Wind';
+import Tide from '../reports/Tide';
 
 const Report = () => {
     const dayBtnStyle = { 
@@ -11,7 +12,7 @@ const Report = () => {
     };
 
     return (
-        <div className="" style={{ backgroundColor: '#b2ebf2', minHeight: '84vh'}}>
+        <div className="" style={{ backgroundColor: '#b2ebf2', minHeight: '160vh' }}>
            
            <div className="row">
                 <div className="col s12 center">
@@ -30,6 +31,7 @@ const Report = () => {
                 <Waves />
                 <Swell />
                 <Wind />
+                <Tide />
                 
             </div>
 
