@@ -1,9 +1,9 @@
 import React from 'react';
-import img from '../../images/pexels-george-keating-948331.jpg'
+import PropTypes from 'prop-types';
 
-const Dashboard = () => {
+const Dashboard = ({ backgroundPrimary }) => {
     return (
-        <div style={{ backgroundImage: `url(${img})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', minHeight: '84vh' }}>
+        <div className="center" style={backgroundPrimary}> 
 
             {/* if user DOESN'T have favorite spots */}
             
@@ -58,6 +58,10 @@ const Dashboard = () => {
             </div>
         </div>
     )
+};
+
+Dashboard.propTypes = {
+    backgroundPrimary: PropTypes.object.isRequired
 };
 
 export default Dashboard;

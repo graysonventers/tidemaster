@@ -1,9 +1,9 @@
 import React from 'react';
-import img from '../../images/pexels-george-keating-948331.jpg';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+const Register = ({ backgroundPrimary }) => {
     return (
-        <div className="center" style={{ backgroundImage: `url(${img})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', minHeight: '84vh'}}>
+        <div className="center" style={backgroundPrimary}>
             <div className="container" style={{ paddingBottom: '50px', paddingTop: '50px' }}>
                 <div className="row">
                     <div className="card col s12" style={{ paddingBottom: '30px', paddingTop: '30px' }}>
@@ -39,6 +39,10 @@ const Register = () => {
             </div>
         </div>
     )
+};
+
+Register.propTypes = {
+    backgroundPrimary: PropTypes.object.isRequired
 };
 
 export default Register;

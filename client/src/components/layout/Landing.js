@@ -1,11 +1,10 @@
 import React from 'react';
-import img from '../../images/pexels-george-keating-948331.jpg';
+import PropTypes from 'prop-types';
 
-const Landing = () => {
+
+const Landing = ({ backgroundPrimary }) => {
     return (
-        <div className="center" style={{ backgroundImage: `url(${img})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', minHeight: '84vh'}}>
-            
-
+        <div className="center" style={backgroundPrimary}>
             <section className="container section large text-center" style={{ padding: '10%' }}>
                 <h1 className="h1 white-text">
                     TideMaster
@@ -14,7 +13,6 @@ const Landing = () => {
                 <span className="white-text" style={{margin: '0 3rem'}}></span>
                 <a href="#login" className="btn cyan darken-3">Login</a>
             </section>
-           
             <section className="container section">
                 <h4 className="white-text">
                 Access surf reports from all over the world
@@ -26,6 +24,10 @@ const Landing = () => {
             </section>
         </div>
     )
-}
+};
 
-export default Landing;
+Landing.propTypes = {
+    backgroundPrimary: PropTypes.object.isRequired
+};
+
+export default Landing; 
