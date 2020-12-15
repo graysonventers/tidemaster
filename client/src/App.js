@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import img from './images/heroImage.jpg'
 import Landing from './components/pages/Landing';
 import NotFound from './components/pages/NotFound';
+import About from './components/pages/About';
+import Support from './components/pages/Support';
 import Dashboard from './components/auth/Dashboard';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -18,7 +20,6 @@ const backgroundPrimary = {
 
 function App() {
   
-
   return (
     <div>
       <Router>
@@ -34,6 +35,12 @@ function App() {
           </Route>
           <Route exact path="/login">
             <Login backgroundPrimary={backgroundPrimary} />
+          </Route>
+          <Route exact path="/about">
+            <About backgroundPrimary={backgroundPrimary} />
+          </Route>
+          <Route exact path="/support">
+            <Support backgroundPrimary={backgroundPrimary} />
           </Route>
           <Route exact path="/">
             <Landing backgroundPrimary={backgroundPrimary} />
