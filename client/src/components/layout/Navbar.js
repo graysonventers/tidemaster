@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import M from 'materialize-css';
 
 const Navbar = () => {
@@ -13,22 +14,24 @@ const Navbar = () => {
                 <nav className="cyan darken-3">
                     <div className="container">
                         <div className="nav-wrapper">
-                            <a className="brand-logo" href="#landing/dashboard">TideMaster</a>
+                            <Link className="brand-logo" to="/">
+                                TideMaster
+                            </Link>
                             <a href="#sideNav" data-target="sidenav" className="sidenav-trigger">
                                 <i className="material-icons">menu</i>
                             </a>
                             <ul className="right hide-on-med-and-down">
                                 <li>
-                                    <a href="#reports">Reports</a>
+                                    <Link to="/reports">Reports</Link>
                                 </li>
                                 <li>
                                     <a href="#search">Search</a>
                                 </li>
                                 <li>
-                                    <a  href="#register">Register</a>
+                                    <Link to="/register">Register</Link>
                                 </li>
                                 <li>
-                                    <a  href="#Login">Login</a>
+                                    <Link to="/Login">Login</Link>
                                 </li>
                             </ul>
                         </div>
@@ -37,19 +40,18 @@ const Navbar = () => {
             </div>
             <ul className="sidenav cyan darken-3" id="sidenav">
                 <li>
-                    <a className="white-text" href="#reports">Reports</a>
+                    <Link className="white-text" to="/reports">Reports</Link>
                 </li>
                 <li>
                     <a className="white-text" href="#search">Search</a>
                 </li>
                 <li>
-                    <a className="white-text" href="#register">Register</a>
+                    <Link className="white-text" to="/register">Register</Link>
                 </li>
                 <li>
-                    <a className="white-text" href="#Login">Login</a>
+                    <Link className="white-text" to="/login">Login</Link>
                 </li>
             </ul>
-
         </Fragment>
     )
 };

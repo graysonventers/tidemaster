@@ -1,8 +1,8 @@
 import React from 'react';
-import img from './images/pexels-george-keating-948331.jpg'
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import Landing from './components/layout/Landing';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import img from './images/heroImage.jpg'
+import Landing from './components/pages/Landing';
+import NotFound from './components/pages/NotFound';
 import Dashboard from './components/auth/Dashboard';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -21,13 +21,28 @@ function App() {
 
   return (
     <div>
-      <Navbar />
-      {/* <Landing backgroundPrimary={backgroundPrimary} /> */}
-      {/* <Dashboard backgroundPrimary={backgroundPrimary} /> */}
-      {/* <Register backgroundPrimary={backgroundPrimary} /> */}
-      <Login backgroundPrimary={backgroundPrimary} />
-      {/* <Report /> */}
-      <Footer />
+      <Router>
+        <Switch>
+          <Route exact path="/dashboard">
+            <Dashboard backgroundPrimary={backgroundPrimary} />
+          </Route>
+          <Route exact path="/report">
+            <Report />
+          </Route>
+          <Route exact path="/register">
+            <Register backgroundPrimary={backgroundPrimary} />
+          </Route>
+          <Route exact path="/login">
+            <Login backgroundPrimary={backgroundPrimary} />
+          </Route>
+          <Route exact path="/">
+            <Landing backgroundPrimary={backgroundPrimary} />
+          </Route>
+          <Route>
+            <NotFound backgroundPrimary={backgroundPrimary} />
+          </Route>
+        </Switch>
+      </Router>  
     </div>
   )
 };
