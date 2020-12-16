@@ -23,7 +23,7 @@ const About = ({ backgroundPrimary }) => {
                                     This website was built by Grayson Venters. It is a simplified version of other surf report applications like Surfline.com and MagicSeaweed.com. 
                                    </p><br></br>
                                    <p >
-                                   I, Grayson, have built this app from scratch using the MERN stack. The app utilizes additional technologies such as Materialize CSS, react router, redux, and axios on the front end. On the back end, I have implemented technologies such as brcrypt.js and jsonwebtoken for security.
+                                   I, Grayson, have built this app from scratch using the MERN stack. The app utilizes additional technologies such as Materialize CSS, react router, redux, and axios on the front end. On the back end, I have implemented technologies such as express-validator, brcrypt.js and jsonwebtoken.
                                    </p>
                                 </div>
                             </div>

@@ -5,21 +5,32 @@ import Landing from './components/pages/Landing';
 import NotFound from './components/pages/NotFound';
 import About from './components/pages/About';
 import Support from './components/pages/Support';
+import Search from './components/pages/Search';
 import Dashboard from './components/auth/Dashboard';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Report from './components/reports/Report';
 
-const backgroundPrimary = {
-  backgroundImage: `url(${img})`, 
-  backgroundPosition: 'center', 
-  backgroundRepeat: 'no-repeat', 
-  backgroundSize: 'cover', 
-  minHeight: '84vh'
+// data (temporary)
+import pipeline from './data/pipeline_616_forecast.json';
+
+// function to change localTimestamp to date.
+const unixTimestampToDate = timestamp => {
+  const milliseconds = timestamp * 1000;
+  const dateObject = new Date(milliseconds);
+  return dateObject;
 };
 
 function App() {
   
+  const backgroundPrimary = {
+    backgroundImage: `url(${img})`, 
+    backgroundPosition: 'center', 
+    backgroundRepeat: 'no-repeat', 
+    backgroundSize: 'cover', 
+    minHeight: '84vh'
+  };
+
   return (
     <div>
       <Router>
@@ -29,6 +40,9 @@ function App() {
           </Route>
           <Route exact path="/report">
             <Report />
+          </Route>
+          <Route exact path="/search">
+            <Search backgroundPrimary={backgroundPrimary} />
           </Route>
           <Route exact path="/register">
             <Register backgroundPrimary={backgroundPrimary} />
