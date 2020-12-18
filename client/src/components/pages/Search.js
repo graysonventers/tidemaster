@@ -24,12 +24,11 @@ const Search = ({ backgroundPrimary }) => {
                             <span className="card-title center">Search surf spots...</span><br></br>
                             <span>Actual results</span><br></br><br></br>
                             <span>Actual results</span><br></br><br></br>
-                            <span>Actual results</span><br></br>
+                            <span>Actual results</span><br></br><br></br>
                             <span>Actual results</span>
                         </div>
                     </div>
                 </div>
-                
             </div>
             
             <Footer />

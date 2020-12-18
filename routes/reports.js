@@ -7,5 +7,4 @@ const router = express.Router();
     // Add report id to user favorites
     // Get user's favorites
     // Delete a report id from user's favorites
-
     
