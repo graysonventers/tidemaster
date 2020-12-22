@@ -10,7 +10,7 @@ import Reports from './components/pages/reports/Reports';
 import Dashboard from './components/auth/Dashboard';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-import Report from './components/reports/Report';
+import Report from './components/report/Report';
 
 // data (temporary)
 import pipeline from './data/pipeline_616_forecast.json';
@@ -29,7 +29,8 @@ function App() {
     backgroundPosition: 'center', 
     backgroundRepeat: 'no-repeat', 
     backgroundSize: 'cover', 
-    minHeight: '84vh'
+    minHeight: '84vh',
+    paddingBottom: '1px'
   };
 
   return (
@@ -40,7 +41,7 @@ function App() {
             <Dashboard backgroundPrimary={backgroundPrimary} />
           </Route>
           <Route exact path="/report">
-            <Report />
+            <Report backgroundPrimary={backgroundPrimary} />
           </Route>
           <Route exact path="/search">
             <Search backgroundPrimary={backgroundPrimary} />

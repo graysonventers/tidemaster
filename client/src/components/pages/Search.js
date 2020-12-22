@@ -30,7 +30,6 @@ const Search = ({ backgroundPrimary }) => {
                     </div>
                 </div>
             </div>
-            
             <Footer />
         </Fragment>
     )

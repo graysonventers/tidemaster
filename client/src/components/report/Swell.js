@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Swell = () => {
+const Swell = ({ cardStyle }) => {
     const swellStyle = {
         marginLeft: '2%',
         marginRight: '2%'
@@ -8,7 +8,7 @@ const Swell = () => {
 
     return (
         <div>
-            <div className="card">
+            <div className="card" style={cardStyle}>
                     <div className="card-content center">
                         <span>Swell Direction</span><br></br>
                         

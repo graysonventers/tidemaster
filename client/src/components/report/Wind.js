@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Wind = () => {
+const Wind = ({ cardStyle }) => {
     const windStyle = {
         marginLeft: '2%',
         marginRight: '2%'
@@ -8,7 +8,7 @@ const Wind = () => {
 
     return (
         <div>
-            <div className="card">
+            <div className="card" style={cardStyle}>
                     <div className="card-content center">
                         <span>Wind (mph)</span>
                         

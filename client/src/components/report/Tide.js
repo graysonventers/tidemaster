@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Tide = () => {
+const Tide = ({ cardStyle }) => {
     return (
         <div>
-            <div className="card">
+            <div className="card" style={cardStyle}>
                 <div className="card-title center">Tides (ft)</div>
                 <div className="card-content">
                     <table className="striped centered">

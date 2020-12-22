@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Navbar from '../../layout/Navbar';
 import Footer from '../../layout/Footer';
@@ -67,17 +68,11 @@ const Reports = ({ backgroundPrimary }) => {
         e.preventDefault();
         setSelectedContinent(e.target.text);
         setSelectedRegion('');
-
-        // console.log(newReportData[0].regions['Southern California'].surfSpots)
     };
 
     const onClickRegion = (e) => {
         e.preventDefault();
         setSelectedRegion(e.target.text);
-
-        if (selectedContinent === '') {
-            setSelectedRegion('');
-        }
     };
 
     return (
@@ -91,7 +86,7 @@ const Reports = ({ backgroundPrimary }) => {
                             <div className="row">
                                 <div className="section col s4">
                                     <ul>
-                                        <h6><a className="black-text" href="#!" onClick={(e) => onClickContinent(e)}>Continents</a></h6>
+                                        <h6>Continents</h6>
                                         {newReportData.map((item, index) => (
                                             <li key={index}>
                                                 <a href="#!" onClick={(e) => onClickContinent(e)}>{item.continent}</a>
@@ -118,42 +113,17 @@ const Reports = ({ backgroundPrimary }) => {
                                     <div className="section col s4">
                                         <ul>
                                             <h6>Surf Spots</h6>
-                                            
-                                            {/* <h6>{newReportData[newReportData.indexOf(selectedContinent)].regions.selectedRegion.surfSpots}</h6> */}
-
                                             {newReportData.map(item => (
-                                                
-                                        
-                                                // Object.keys(item.regions).map(region => (
-                                                //     region === selectedRegion && (
-
-                                                //         console.log(region),
-                                                //         console.log(newReportData.region[surfSpots])
-                                                //         // region.surfSpots.map((surfSpot, index) => (
-                                                //         //     console.log(surfSpot)
-                                                //         // ))
-                                                //     )
-                                                // ))
-                                                
-                                                
                                                 Object.keys(item.regions).map(region => (
                                                     region === selectedRegion && (
-
                                                         item.regions[region].surfSpots.map((surfSpot, index) => (
                                                             <li key={index}>
-                                                                <a href="#!">{surfSpot}</a>
+                                                                <Link to="/report">{surfSpot}</Link>
                                                             </li>
                                                         ))
                                                     )
                                                 ))
-
-                                                // Object.keys(item.regions) === selectedRegion && (
-                                                //     Object.keys(item.regions[selectedRegion]).map((surfSpot, index) => (
-                                                //         console.log('Yello')
-                                                //     ))
-                                                // )
                                             ))}
-
                                         </ul>
                                     </div>
                                 )}

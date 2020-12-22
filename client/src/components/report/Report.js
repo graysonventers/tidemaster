@@ -1,24 +1,29 @@
 import React, { Fragment } from 'react';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
-import Overview from '../reports/Overview';
-import Waves from '../reports/Waves';
-import Swell from '../reports/Swell';
-import Wind from '../reports/Wind';
-import Tide from '../reports/Tide';
+import Overview from '../report/Overview';
+import Waves from '../report/Waves';
+import Swell from '../report/Swell';
+import Wind from '../report/Wind';
+import Tide from '../report/Tide';
 
-const Report = () => {
+const Report = ({ backgroundPrimary }) => {
     const dayBtnStyle = { 
         margin: '5px',
         backgroundColor: '#00838f',
     };
 
+    const cardStye = {
+        opacity: '80%'
+    };
+
+    // backgroundColor: '#b2ebf2', minHeight: '160vh'
+
     return (
         <Fragment>
             <Navbar />
-            <div className="" style={{ backgroundColor: '#b2ebf2', minHeight: '160vh' }}>
-           
-            <div className="row">
+            <div style={backgroundPrimary} >
+                <div className="row">
                     <div className="col s12 center">
                         <h4>Trails, Orange County, CA</h4>
                         <button className="center btn btn-small cyan darken-3">Add to Favorites</button>
@@ -31,11 +36,11 @@ const Report = () => {
                         <button style={dayBtnStyle} className="btn">Wed 11/25</button>
                     </div>
                     <h5>Monday, 11/23/2020</h5>
-                    <Overview />
-                    <Waves />
-                    <Swell />
-                    <Wind />
-                    <Tide />
+                    <Overview cardStyle={cardStye} />
+                    <Waves cardStyle={cardStye}/>
+                    <Swell cardStyle={cardStye}/>
+                    <Wind cardStyle={cardStye}/>
+                    <Tide cardStyle={cardStye}/>
                     
                 </div>
             </div>

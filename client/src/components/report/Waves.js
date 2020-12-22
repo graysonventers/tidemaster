@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-const Waves = () => {
+const Waves = ({ cardStyle }) => {
     const waveHeightStyle = {
         marginLeft: '2%',
         marginRight: '2%'
@@ -8,7 +8,7 @@ const Waves = () => {
 
     return (
         <Fragment>
-            <div className="card">
+            <div className="card" style={cardStyle}>
                     <div className="card-content center">
                         <span>Wave Heights (ft)</span>
                         

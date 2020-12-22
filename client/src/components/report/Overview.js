@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 
-const Overview = () => {
+const Overview = ({ cardStyle }) => {
     return (
         <Fragment>
-            <div className="card">
+            <div className="card" style={cardStyle}>
                     <div className="card-content center">
                         <span>Overview</span>
                         <div className="row section">
@@ -24,6 +24,6 @@ const Overview = () => {
                 </div>
         </Fragment>
     )
-}
+};
 
 export default Overview;
