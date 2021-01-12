@@ -1,8 +1,9 @@
 import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import M from 'materialize-css';
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated }) => {
     useEffect(() => {
         const sideNav = document.querySelector('.sidenav');
         M.Sidenav.init(sideNav, {});
@@ -10,10 +11,12 @@ const Navbar = () => {
 
     return (
         <Fragment>
+            
             <div className="navbar-fixed">
                 <nav className="cyan darken-3">
                     <div className="container">
                         <div className="nav-wrapper">
+                            
                             <Link className="brand-logo" to="/">
                                 TideMaster
                             </Link>
@@ -27,12 +30,23 @@ const Navbar = () => {
                                 <li>
                                     <Link to="/search">Search</Link>
                                 </li>
-                                <li>
-                                    <Link to="/register">Register</Link>
-                                </li>
-                                <li>
-                                    <Link to="/Login">Login</Link>
-                                </li>
+                                {isAuthenticated ? 
+                                    (<Fragment>
+                                        <li>
+                                            <Link to="/dashboard">Dashboard</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/logout">Logout</Link>
+                                        </li>
+                                    </Fragment>) : 
+                                        (<Fragment>
+                                            <li>
+                                                <Link to="/register">Register</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/Login">Login</Link>
+                                            </li>
+                                        </Fragment>)}
                             </ul>
                         </div>
                     </div>
@@ -45,15 +59,31 @@ const Navbar = () => {
                 <li>
                     <Link className="white-text" to="/search">Search</Link>
                 </li>
-                <li>
-                    <Link className="white-text" to="/register">Register</Link>
-                </li>
-                <li>
-                    <Link className="white-text" to="/login">Login</Link>
-                </li>
+
+                {isAuthenticated ? 
+                                    (<Fragment>
+                                        <li>
+                                            <Link to="/dashboard">Dashboard</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/logout">Logout</Link>
+                                        </li>
+                                    </Fragment>) : 
+                                        (<Fragment>
+                                            <li>
+                                                <Link to="/register">Register</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/Login">Login</Link>
+                                            </li>
+                                        </Fragment>)}
             </ul>
         </Fragment>
     )
 };
 
-export default Navbar;
+const mapStateToProps = state => ({
+    isAuthenticated: state.isAuthenticated
+})
+
+export default connect(mapStateToProps, {})(Navbar);

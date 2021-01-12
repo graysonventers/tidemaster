@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import img from './images/heroImage.jpg'
 import Landing from './components/pages/Landing';
 import NotFound from './components/pages/NotFound';
@@ -11,9 +13,6 @@ import Dashboard from './components/auth/Dashboard';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Report from './components/report/Report';
-
-// data (temporary)
-import pipeline from './data/pipeline_616_forecast.json';
 
 // function to change localTimestamp to date.
 const unixTimestampToDate = timestamp => {
@@ -35,40 +34,42 @@ function App() {
 
   return (
     <div>
-      <Router>
-        <Switch>
-          <Route exact path="/dashboard">
-            <Dashboard backgroundPrimary={backgroundPrimary} />
-          </Route>
-          <Route exact path="/report">
-            <Report backgroundPrimary={backgroundPrimary} />
-          </Route>
-          <Route exact path="/search">
-            <Search backgroundPrimary={backgroundPrimary} />
-          </Route>
-          <Route exact path="/reports">
-            <Reports backgroundPrimary={backgroundPrimary} />
-          </Route>
-          <Route exact path="/register">
-            <Register backgroundPrimary={backgroundPrimary} />
-          </Route>
-          <Route exact path="/login">
-            <Login backgroundPrimary={backgroundPrimary} />
-          </Route>
-          <Route exact path="/about">
-            <About backgroundPrimary={backgroundPrimary} />
-          </Route>
-          <Route exact path="/support">
-            <Support backgroundPrimary={backgroundPrimary} />
-          </Route>
-          <Route exact path="/">
-            <Landing backgroundPrimary={backgroundPrimary} />
-          </Route>
-          <Route>
-            <NotFound backgroundPrimary={backgroundPrimary} />
-          </Route>
-        </Switch>
-      </Router>  
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route exact path="/dashboard">
+              <Dashboard backgroundPrimary={backgroundPrimary} />
+            </Route>
+            <Route exact path="/report">
+              <Report backgroundPrimary={backgroundPrimary} />
+            </Route>
+            <Route exact path="/search">
+              <Search backgroundPrimary={backgroundPrimary} />
+            </Route>
+            <Route exact path="/reports">
+              <Reports backgroundPrimary={backgroundPrimary} />
+            </Route>
+            <Route exact path="/register">
+              <Register backgroundPrimary={backgroundPrimary} />
+            </Route>
+            <Route exact path="/login">
+              <Login backgroundPrimary={backgroundPrimary} />
+            </Route>
+            <Route exact path="/about">
+              <About backgroundPrimary={backgroundPrimary} />
+            </Route>
+            <Route exact path="/support">
+              <Support backgroundPrimary={backgroundPrimary} />
+            </Route>
+            <Route exact path="/">
+              <Landing backgroundPrimary={backgroundPrimary} />
+            </Route>
+            <Route>
+              <NotFound backgroundPrimary={backgroundPrimary} />
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>
     </div>
   )
 };

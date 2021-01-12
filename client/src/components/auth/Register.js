@@ -1,10 +1,40 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import PropTypes from 'prop-types';
+import { register } from '../../redux/actions/authActions';
 
-const Register = ({ backgroundPrimary }) => {
+const Register = ({ backgroundPrimary, register, isAuthenticated }) => {
+
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        password2: ''
+    });
+
+    const { name, email, password, password2 } = formData;
+
+    const onChange = e => {
+        setFormData({ ...formData, [e.target.id]: e.target.value })
+    };
+
+    const onSubmit = e => {
+        e.preventDefault();
+
+        if (password !== password2) {
+            alert('Passwords do not match');
+        } else {
+            register({name, email, password});
+        }
+    };
+
+    if(isAuthenticated) {
+        return <Redirect to="/dashboard" />
+    }
+ 
     return (
         <Fragment>
             <Navbar />
@@ -15,21 +45,21 @@ const Register = ({ backgroundPrimary }) => {
                             <div className="card-title">
                                 Register
                             </div>
-                            <div className="card-content">
+                            <form className="card-content" onSubmit={e => onSubmit(e)}>
                                 <div className="input-field col s8 offset-s2">
-                                    <input id="name" type="text" className="validate"></input>
+                                    <input id="name" type="text" className="validate" onChange={onChange}></input>
                                     <label htmlFor="name">Name</label>
                                 </div>
                                 <div className="input-field col s8 offset-s2">
-                                    <input id="email" type="email" className="validate"></input>
+                                    <input id="email" type="email" className="validate" onChange={onChange}></input>
                                     <label htmlFor="email">Email</label>
                                 </div>
                                 <div className="input-field col s8 offset-s2">
-                                    <input id="password" type="password" className="validate"></input>
+                                    <input id="password" type="password" className="validate" onChange={onChange}></input>
                                     <label htmlFor="password">Password</label>
                                 </div>
                                 <div className="input-field col s8 offset-s2">
-                                    <input id="password2" type="password" className="validate"></input>
+                                    <input id="password2" type="password" className="validate" onChange={onChange}></input>
                                     <label htmlFor="password2">Confirm Password</label>
                                 </div>
                                 <div className="col s8 offset-s2">
@@ -38,7 +68,7 @@ const Register = ({ backgroundPrimary }) => {
                                 <div className="col s8 offset-s2">
                                     <span>Already registered? <Link style={{ color: "#00838f" }} to="/login">Log in</Link></span>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -53,4 +83,8 @@ Register.propTypes = {
     backgroundPrimary: PropTypes.object.isRequired
 };
 
-export default Register;
+const mapStateToProps = state => ({
+    isAuthenticated: state.isAuthenticated
+});
+
+export default connect(mapStateToProps, { register })(Register);
