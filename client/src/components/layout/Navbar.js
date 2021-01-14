@@ -12,12 +12,10 @@ const Navbar = ({ isAuthenticated, logout }) => {
 
     return (
         <Fragment>
-            
             <div className="navbar-fixed">
                 <nav className="cyan darken-3">
                     <div className="container">
                         <div className="nav-wrapper">
-                            
                             <Link className="brand-logo" to="/">
                                 TideMaster
                             </Link>
@@ -60,24 +58,18 @@ const Navbar = ({ isAuthenticated, logout }) => {
                 <li>
                     <Link className="white-text" to="/search">Search</Link>
                 </li>
-
-                {isAuthenticated ? 
-                                    (<Fragment>
-                                        <li>
-                                            <Link to="/dashboard">Dashboard</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/logout">Logout</Link>
-                                        </li>
-                                    </Fragment>) : 
-                                        (<Fragment>
-                                            <li>
-                                                <Link to="/register">Register</Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/Login">Login</Link>
-                                            </li>
-                                        </Fragment>)}
+                <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                    <Link to="/logout" onClick={() => logout()}>Logout</Link>
+                </li>
+                <li>
+                    <Link to="/register">Register</Link>
+                </li>
+                <li>
+                    <Link to="/Login">Login</Link>
+                </li>            
             </ul>
         </Fragment>
     )

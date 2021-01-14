@@ -6,7 +6,7 @@ import Footer from '../layout/Footer';
 import PropTypes from 'prop-types';
 import { login } from '../../redux/actions/authActions';
 
-const Login = ({ backgroundPrimary, login }) => {
+const Login = ({ backgroundPrimary, login, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -21,6 +21,10 @@ const Login = ({ backgroundPrimary, login }) => {
     const onSubmit = e => {
         e.preventDefault();
         login({email, password});
+    }
+
+    if (isAuthenticated) {
+        return <Redirect to='/dashboard' />
     }
 
     return (
@@ -62,4 +66,8 @@ Login.propTypes = {
     backgroundPrimary: PropTypes.object.isRequired
 };
 
-export default connect(null, { login })(Login);
+const mapStateToProps = state => ({
+    isAuthenticated: state.isAuthenticated
+});
+
+export default connect(mapStateToProps, { login })(Login);

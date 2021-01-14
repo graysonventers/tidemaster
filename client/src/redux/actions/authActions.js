@@ -21,9 +21,6 @@ export const loadUser = () => async dispatch => {
 
         dispatch({ type: LOAD_USER, payload: res.data });
 
-        console.log(`User Loaded`, res.data);
-
-
     } catch (err) {
         // const errors = err.response.data.errors;
 
@@ -46,8 +43,6 @@ export const register = ({ name, email, password }) => async dispatch => {
         const res = await axios(config);
 
         dispatch({ type: REGISTER, payload: res.data })
-
-        console.log(res.data);
         
     } catch (err) {
         const errors = err.response.data.errors;
@@ -71,9 +66,7 @@ export const login = ({ email, password }) => async dispatch => {
         const res = await axios(config);
 
         dispatch({ type: LOGIN, payload: res.data });
-        // dispatch(loadUser());
-
-        console.log(res.data);
+        dispatch(loadUser());
 
     } catch (err) {
         const errors = err.response.data.errors;

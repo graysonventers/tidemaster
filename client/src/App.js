@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import img from './images/heroImage.jpg'
@@ -29,7 +29,7 @@ function App() {
     if (token) {
     store.dispatch(loadUser());
     }
-  }, [])
+  }, []);
   
   
   const backgroundPrimary = {
@@ -62,7 +62,7 @@ function App() {
               <Register backgroundPrimary={backgroundPrimary} />
             </Route>
             <Route exact path="/login">
-              {localStorage.getItem('token') ? <Redirect to='/dashboard' /> : <Login backgroundPrimary={backgroundPrimary} />}
+              <Login backgroundPrimary={backgroundPrimary} />
             </Route>
             <Route exact path="/about">
               <About backgroundPrimary={backgroundPrimary} />
