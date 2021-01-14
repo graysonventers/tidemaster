@@ -2,8 +2,9 @@ import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import M from 'materialize-css';
+import { logout } from '../../redux/actions/authActions';
 
-const Navbar = ({ isAuthenticated }) => {
+const Navbar = ({ isAuthenticated, logout }) => {
     useEffect(() => {
         const sideNav = document.querySelector('.sidenav');
         M.Sidenav.init(sideNav, {});
@@ -36,7 +37,7 @@ const Navbar = ({ isAuthenticated }) => {
                                             <Link to="/dashboard">Dashboard</Link>
                                         </li>
                                         <li>
-                                            <Link to="/logout">Logout</Link>
+                                            <Link to="/" onClick={() => logout()}>Logout</Link>
                                         </li>
                                     </Fragment>) : 
                                         (<Fragment>
@@ -86,4 +87,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.isAuthenticated
 })
 
-export default connect(mapStateToProps, {})(Navbar);
+export default connect(mapStateToProps, {logout})(Navbar);

@@ -1,10 +1,28 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import PropTypes from 'prop-types';
+import { login } from '../../redux/actions/authActions';
 
-const Login = ({ backgroundPrimary }) => {
+const Login = ({ backgroundPrimary, login }) => {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+
+    const { email, password } = formData;
+
+    const onChange = e => {
+        setFormData( { ...formData, [e.target.id]: e.target.value });
+    }
+
+    const onSubmit = e => {
+        e.preventDefault();
+        login({email, password});
+    }
+
     return (
         <Fragment>
             <Navbar />
@@ -15,13 +33,13 @@ const Login = ({ backgroundPrimary }) => {
                             <div className="card-title">
                                 Log In
                             </div>
-                            <div className="card-content">
+                            <form className="card-content" onSubmit={onSubmit}>
                                 <div className="input-field col s8 offset-s2">
-                                    <input id="email" type="email" className="validate"></input>
+                                    <input id="email" type="email" className="validate" onChange={onChange}></input>
                                     <label htmlFor="email">Email</label>
                                 </div>
                                 <div className="input-field col s8 offset-s2">
-                                    <input id="password" type="password" className="validate"></input>
+                                    <input id="password" type="password" className="validate" onChange={onChange}></input>
                                     <label htmlFor="password">Password</label>
                                 </div>
                                 <div className="col s8 offset-s2">
@@ -30,14 +48,13 @@ const Login = ({ backgroundPrimary }) => {
                                 <div className="col s8 offset-s2">
                                     <span>Don't have an account? <Link style={{ color: "#00838f" }} to="/register">Register</Link></span>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
             <Footer />
-        </Fragment>
-        
+        </Fragment>   
     )
 };
 
@@ -45,4 +62,4 @@ Login.propTypes = {
     backgroundPrimary: PropTypes.object.isRequired
 };
 
-export default Login;
+export default connect(null, { login })(Login);

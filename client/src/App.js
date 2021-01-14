@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import img from './images/heroImage.jpg'
@@ -13,15 +13,24 @@ import Dashboard from './components/auth/Dashboard';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Report from './components/report/Report';
+import { loadUser } from './redux/actions/authActions';
 
 // function to change localTimestamp to date.
-const unixTimestampToDate = timestamp => {
-  const milliseconds = timestamp * 1000;
-  const dateObject = new Date(milliseconds);
-  return dateObject;
-};
+// const unixTimestampToDate = timestamp => {
+//   const milliseconds = timestamp * 1000;
+//   const dateObject = new Date(milliseconds);
+//   return dateObject;
+// };
 
 function App() {
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+    store.dispatch(loadUser());
+    }
+  }, [])
+  
   
   const backgroundPrimary = {
     backgroundImage: `url(${img})`, 
@@ -53,7 +62,7 @@ function App() {
               <Register backgroundPrimary={backgroundPrimary} />
             </Route>
             <Route exact path="/login">
-              <Login backgroundPrimary={backgroundPrimary} />
+              {localStorage.getItem('token') ? <Redirect to='/dashboard' /> : <Login backgroundPrimary={backgroundPrimary} />}
             </Route>
             <Route exact path="/about">
               <About backgroundPrimary={backgroundPrimary} />
