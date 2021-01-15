@@ -13,9 +13,9 @@ const initialState = {
 }
 
 export default function (state = initialState, action) {
-   const { type, payload } = action;
+    const { type, payload } = action;
 
-   switch (type) {
+    switch (type) {
         case LOAD_USER:
             return {
                 ...state,
@@ -43,5 +43,5 @@ export default function (state = initialState, action) {
             }
         default:
             return state;
-   }
+    }
 };

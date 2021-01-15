@@ -58,18 +58,21 @@ const Navbar = ({ isAuthenticated, logout }) => {
                 <li>
                     <Link className="white-text" to="/search">Search</Link>
                 </li>
-                <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                </li>
-                <li>
-                    <Link to="/logout" onClick={() => logout()}>Logout</Link>
-                </li>
-                <li>
-                    <Link to="/register">Register</Link>
-                </li>
-                <li>
-                    <Link to="/Login">Login</Link>
-                </li>            
+                {isAuthenticated ? (<Fragment>
+                    <li>
+                        <Link className="white-text" to="/dashboard">Dashboard</Link>
+                    </li>
+                    <li>
+                        <Link className="white-text" to="/" onClick={() => logout()}>Logout</Link>
+                    </li>
+                </Fragment>) : (<Fragment>
+                    <li>
+                    <Link className="white-text" to="/register">Register</Link>
+                    </li>
+                    <li>
+                        <Link className="white-text" to="/Login">Login</Link>
+                    </li>
+                </Fragment>)}            
             </ul>
         </Fragment>
     )

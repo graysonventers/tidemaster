@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import PrivateRoute from './utilities/PrivateRoute';
 import store from './redux/store';
 import img from './images/heroImage.jpg'
 import Landing from './components/pages/Landing';
@@ -46,9 +47,7 @@ function App() {
       <Provider store={store}>
         <Router>
           <Switch>
-            <Route exact path="/dashboard">
-              <Dashboard backgroundPrimary={backgroundPrimary} />
-            </Route>
+            <PrivateRoute exact path="/dashboard" backgroundPrimary={backgroundPrimary} component={Dashboard} />
             <Route exact path="/report">
               <Report backgroundPrimary={backgroundPrimary} />
             </Route>
