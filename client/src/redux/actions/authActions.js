@@ -4,12 +4,15 @@ import {
     LOAD_USER,
     LOGIN,
     REGISTER,
-    LOGOUT
+    LOGOUT,
+    LOGIN_FAIL,
+    REGISTER_FAIL,
+    LOAD_USER_FAIL
 } from './actionTypes';
 
 // Load User
 export const loadUser = () => async dispatch => {
-
+    
     const config = {
         method: 'get',
         url: 'http://localhost:5000/api/auth',
@@ -22,11 +25,12 @@ export const loadUser = () => async dispatch => {
         dispatch({ type: LOAD_USER, payload: res.data });
 
     } catch (err) {
-        // const errors = err.response.data.errors;
 
-        // if(errors) {
-        //     errors.forEach(error => console.log(error));
-        // }
+        if(err) {
+            console.log(err);
+        }
+
+        dispatch({ type: LOAD_USER_FAIL })
     }
 };
 
@@ -43,6 +47,7 @@ export const register = ({ name, email, password }) => async dispatch => {
         const res = await axios(config);
 
         dispatch({ type: REGISTER, payload: res.data })
+        dispatch(loadUser());
         
     } catch (err) {
         const errors = err.response.data.errors;
@@ -50,6 +55,8 @@ export const register = ({ name, email, password }) => async dispatch => {
         if(errors) {
             errors.forEach(error => console.log(error));
         }
+
+        dispatch({ type: REGISTER_FAIL })
     }
 };
 
@@ -62,18 +69,18 @@ export const login = ({ email, password }) => async dispatch => {
         headers: {'Content-Type': 'application/json'}
     };
 
-    try {
+    try {      
         const res = await axios(config);
-
+        
         dispatch({ type: LOGIN, payload: res.data });
         dispatch(loadUser());
-
+        
     } catch (err) {
-        const errors = err.response.data.errors;
 
-        if(errors) {
-            errors.forEach(error => console.log(error));
+        if(err) {
+            console.log(err.message);
         }
+        dispatch({ type: LOGIN_FAIL })
     }
 };
 
@@ -81,5 +88,4 @@ export const login = ({ email, password }) => async dispatch => {
 
 export const logout = () => dispatch => {
     dispatch({ type: LOGOUT });
-    console.log('User has been logged out');
 };

@@ -2,7 +2,10 @@ import {
     LOGIN,
     REGISTER,
     LOGOUT,
-    LOAD_USER
+    LOAD_USER,
+    LOGIN_FAIL,
+    REGISTER_FAIL,
+    LOAD_USER_FAIL
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -12,7 +15,7 @@ const initialState = {
     user: null
 }
 
-export default function (state = initialState, action) {
+export default function rootReducer (state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
@@ -28,11 +31,14 @@ export default function (state = initialState, action) {
            localStorage.setItem('token', payload.token);
            return {
                ...state,
-               token: payload.token,
+               ...payload,
                isAuthenticated: true,
                loading: false
            }
         case LOGOUT:
+        case LOGIN_FAIL:
+        case REGISTER_FAIL:
+        case LOAD_USER_FAIL:
             localStorage.removeItem('token');
             return {
                 ...state,

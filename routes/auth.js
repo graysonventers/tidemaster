@@ -59,11 +59,12 @@ router.post('/', [
     } catch (err) {
         console.error(err.message);
         res.status(500).send(err.message);
+        console.log('Login Failure from the server')
     }
 });
 
 //  @route      GET /api/auth
-//  @desc       get logged in user by token
+//  @desc       get logged in user by token / loadUser
 //  @access     private
 router.get('/', auth, async (req, res) => {
     try {

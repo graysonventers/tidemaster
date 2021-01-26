@@ -1,11 +1,17 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import PropTypes from 'prop-types';
 
 
-const Landing = ({ backgroundPrimary }) => {
+const Landing = ({ backgroundPrimary, isAuthenticated }) => {
+
+    if(isAuthenticated) {
+        return <Redirect to='/dashboard'/>
+    }
+
     return (
         <Fragment>
             <Navbar />
@@ -37,4 +43,8 @@ Landing.propTypes = {
     backgroundPrimary: PropTypes.object.isRequired
 };
 
-export default Landing; 
+const mapStateToProps = state => ({
+    isAuthenticated: state.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Landing); 

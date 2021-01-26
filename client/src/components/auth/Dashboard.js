@@ -1,18 +1,20 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
+import Loading from '../layout/Loading';
 import PropTypes from 'prop-types';
 
-const Dashboard = ({ backgroundPrimary }) => {
-    return (
+const Dashboard = ({ backgroundPrimary, user }) => {
+
+    return user === null ? (<Loading />) :  
+        (
         <Fragment>
             <Navbar />
             <div className="center" style={backgroundPrimary}> 
 
-                {/* if user DOESN'T have favorite spots */}
-
-                {/* <div className="row" style={{ paddingTop: '30vh' }}>
+                {!user.favoriteSpots.length > 0 ? (<div className="row" style={{ paddingTop: '30vh' }}>
                         <div className="col s6 offset-s3 center">
                             <div className="card cyan darken-3">
                                 <div className="card-content white-text">
@@ -26,10 +28,7 @@ const Dashboard = ({ backgroundPrimary }) => {
                                 </section>
                             </div>
                         </div>
-                    </div> */}
-                    
-                {/* if user DOES have favorite spots */}
-                <div className="container" style={{ paddingTop: '5%', paddingBottom: '5%' }}>
+                    </div>) : (<div className="container" style={{ paddingTop: '5%', paddingBottom: '5%' }}>
                     <Link to="/reports/:id">
                         <div className="card hoverable black-text center" style={{ opacity: '80%', height: '80px', verticalAlign: 'middle' }}>
                             
@@ -60,7 +59,7 @@ const Dashboard = ({ backgroundPrimary }) => {
                             </div>
                         </div>
                     </Link>
-                </div>
+                </div>)}                
             </div>
             <Footer />
         </Fragment>
@@ -71,4 +70,9 @@ Dashboard.propTypes = {
     backgroundPrimary: PropTypes.object.isRequired
 };
 
-export default Dashboard;
+const mapStateToProps = state => ({
+    user: state.user,
+    loading: state.loading
+});
+
+export default connect(mapStateToProps)(Dashboard);

@@ -52,11 +52,15 @@ router.post('/', [
         await user.save();
 
         // create payload for JWT
-        const payload = user._id;
+        const payload = {
+            user: {
+                id: user.id
+            }
+        }
 
         // create token and send with results at json
         jwt.sign(
-            {payload},
+            payload,
             config.get('jwtSecret'),
             {expiresIn: '1 day'},
             function(err, token) {

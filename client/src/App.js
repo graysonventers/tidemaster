@@ -16,13 +16,6 @@ import Login from './components/auth/Login';
 import Report from './components/report/Report';
 import { loadUser } from './redux/actions/authActions';
 
-// function to change localTimestamp to date.
-// const unixTimestampToDate = timestamp => {
-//   const milliseconds = timestamp * 1000;
-//   const dateObject = new Date(milliseconds);
-//   return dateObject;
-// };
-
 function App() {
 
   useEffect(() => {

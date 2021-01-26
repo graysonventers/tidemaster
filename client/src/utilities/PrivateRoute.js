@@ -1,11 +1,11 @@
+import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => {
-    const authenticated = isAuthenticated;
 
-    if (authenticated) {
-        return <Route {...rest} render={() => <Component {...rest} /> }/>
+    if (isAuthenticated === true) {
+        return <Route render={() => <Component {...rest} /> }/>
     } else {
         return <Redirect to="/login" />
     }
