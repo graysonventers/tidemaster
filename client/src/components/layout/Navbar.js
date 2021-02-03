@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import M from 'materialize-css';
 import { logout } from '../../redux/actions/authActions';
 
-const Navbar = ({ isAuthenticated, logout, user }) => {
+const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
     useEffect(() => {
         const sideNav = document.querySelector('.sidenav');
         M.Sidenav.init(sideNav, {});
@@ -82,8 +82,7 @@ const Navbar = ({ isAuthenticated, logout, user }) => {
 };
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.isAuthenticated,
-    user: state.user
+    auth: state.auth
 })
 
 export default connect(mapStateToProps, {logout})(Navbar);

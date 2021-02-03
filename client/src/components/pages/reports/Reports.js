@@ -1,10 +1,9 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Navbar from '../../layout/Navbar';
 import Footer from '../../layout/Footer';
 
-const Reports = ({ backgroundPrimary }) => {
+const Reports = () => {
 
     // // establish dataModel
     // const reportDataModel = [
@@ -78,9 +77,9 @@ const Reports = ({ backgroundPrimary }) => {
     return (
         <Fragment>
             <Navbar />
-            <div style={backgroundPrimary}>
+            <div className="backgroundPrimary">
                 <div className="container section">
-                    <div className="card" style={{ opacity: '80%' }}>
+                    <div className="card cardOpacity">
                         <div className="card-content">
                             <span className="card-title center">Reports</span><br></br>
                             <div className="row">
@@ -131,14 +130,10 @@ const Reports = ({ backgroundPrimary }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
             <Footer />
         </Fragment>
     )
-};
-
-Reports.propTypes = {
-    backgroundPrimary: PropTypes.object.isRequired
 };
 
 export default Reports;

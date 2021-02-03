@@ -1,0 +1,12 @@
+.backgroundPrimary {
+    background: url('./images/heroImage.jpg') no-repeat fixed;
+    background-size: cover;
+    background-position: 'center center'; 
+    background-repeat: no-repeat;
+    min-height: 84vh;
+    padding-bottom: 1px;
+}
+
+.cardOpacity {
+    opacity: 80%;
+}

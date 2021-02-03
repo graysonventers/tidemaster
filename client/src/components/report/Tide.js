@@ -1,13 +1,14 @@
 import React from 'react';
 
-const Tide = ({ cardStyle }) => {
+const Tide = () => {
     return (
         <div>
-            <div className="card" style={cardStyle}>
-                <div className="card-title center">Tides (ft)</div>
-                <div className="card-content">
+            <div className="card cardOpacity" >
+            <div className="card-content center valign-content flow-text">
+                <span>Tides</span>
+                
                     <table className="striped centered">
-                        <tbody className="">
+                        <tbody >
                             <tr>
                                 <td>High</td>
                                 <td>5:17am</td>

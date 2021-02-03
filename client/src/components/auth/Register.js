@@ -38,7 +38,7 @@ const Register = ({ backgroundPrimary, register, isAuthenticated }) => {
     return (
         <Fragment>
             <Navbar />
-            <div className="center" style={backgroundPrimary}>
+            <div className="center backgroundPrimary">
                 <div className="container" style={{ paddingBottom: '50px', paddingTop: '50px' }}>
                     <div className="row">
                         <div className="card col s12" style={{ paddingBottom: '30px', paddingTop: '30px' }}>
@@ -80,11 +80,12 @@ const Register = ({ backgroundPrimary, register, isAuthenticated }) => {
 };
 
 Register.propTypes = {
-    backgroundPrimary: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    register: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.isAuthenticated
+    auth: state.auth
 });
 
 export default connect(mapStateToProps, { register })(Register);

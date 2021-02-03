@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-const Waves = ({ cardStyle }) => {
+const Waves = () => {
     const waveHeightStyle = {
         marginLeft: '2%',
         marginRight: '2%'
@@ -8,12 +8,12 @@ const Waves = ({ cardStyle }) => {
 
     return (
         <Fragment>
-            <div className="card" style={cardStyle}>
-                    <div className="card-content center">
+            <div className="card cardOpacity">
+                    <div className="card-content center flow-text">
                         <span>Wave Heights (ft)</span>
                         
                         <div className="row section">
-                            <span className="col s1" style={waveHeightStyle}>2-3</span>
+                            <span className="col s1" style={waveHeightStyle}>12-12</span>
                             <span className="col s1" style={waveHeightStyle}>2-3</span>
                             <span className="col s1" style={waveHeightStyle}>2-3</span>
                             <span className="col s1" style={waveHeightStyle}>2-3</span>
@@ -36,6 +36,6 @@ const Waves = ({ cardStyle }) => {
                 </div>
         </Fragment>
     )
-}
+};
 
 export default Waves

@@ -2,11 +2,11 @@ import React, { Fragment } from 'react';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 
-const Search = ({ backgroundPrimary }) => {
+const Search = () => {
     return (
         <Fragment>
             <Navbar />
-            <div style={backgroundPrimary}>
+            <div className="backgroundPrimary">
                 <nav>
                     <div className="nav-wrapper">
                         <form>

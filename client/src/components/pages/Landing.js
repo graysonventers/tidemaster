@@ -6,16 +6,16 @@ import Footer from '../layout/Footer';
 import PropTypes from 'prop-types';
 
 
-const Landing = ({ backgroundPrimary, isAuthenticated }) => {
+const Landing = ({ auth }) => {
 
-    if(isAuthenticated) {
+    if(auth.isAuthenticated) {
         return <Redirect to='/dashboard'/>
     }
 
     return (
         <Fragment>
             <Navbar />
-            <div className="center" style={backgroundPrimary}>
+            <div className="center backgroundPrimary">
                 <section className="container section large text-center" style={{ padding: '10%' }}>
                     <h1 className="h1 white-text">
                         TideMaster
@@ -40,11 +40,11 @@ const Landing = ({ backgroundPrimary, isAuthenticated }) => {
 };
 
 Landing.propTypes = {
-    backgroundPrimary: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.isAuthenticated
+    auth: state.auth
 });
 
 export default connect(mapStateToProps)(Landing); 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Wind = ({ cardStyle }) => {
+const Wind = () => {
     const windStyle = {
         marginLeft: '2%',
         marginRight: '2%'
@@ -8,10 +8,9 @@ const Wind = ({ cardStyle }) => {
 
     return (
         <div>
-            <div className="card" style={cardStyle}>
-                    <div className="card-content center">
+            <div className="card cardOpacity" >
+                    <div className="card-content center flow-text" >
                         <span>Wind (mph)</span>
-                        
                         <div className="row section">
                             <span className="col s1" style={windStyle}>2</span>
                             <span className="col s1" style={windStyle}>2</span>

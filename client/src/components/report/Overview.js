@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 
-const Overview = ({ cardStyle }) => {
+const Overview = () => {
     return (
         <Fragment>
-            <div className="card" style={cardStyle}>
-                    <div className="card-content center">
+            <div className="card cardOpacity">
+                    <div className="card-content center flow-text">
                         <span>Overview</span>
                         <div className="row section">
                             <span className="col s2">Wave Height</span>

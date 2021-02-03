@@ -6,7 +6,7 @@ import Footer from '../layout/Footer';
 import PropTypes from 'prop-types';
 import { login } from '../../redux/actions/authActions';
 
-const Login = ({ backgroundPrimary, login, isAuthenticated }) => {
+const Login = ({ login, auth }) => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -15,22 +15,22 @@ const Login = ({ backgroundPrimary, login, isAuthenticated }) => {
     const { email, password } = formData;
 
     const onChange = e => {
-        setFormData( { ...formData, [e.target.id]: e.target.value });
-    }
+        setFormData({ ...formData, [e.target.id]: e.target.value });
+    };
 
     const onSubmit = e => {
         e.preventDefault();
         login({email, password});
-    }
+    };
 
-    if (isAuthenticated) {
+    if (auth.isAuthenticated) {
         return <Redirect to='/dashboard' />
     }
 
     return (
         <Fragment>
             <Navbar />
-            <div className="center" style={backgroundPrimary}>
+            <div className="center backgroundPrimary">
                 <div className="container" style={{ paddingBottom: '50px', paddingTop: '50px' }}>
                     <div className="row">
                         <div className="card col s12" style={{ paddingBottom: '30px', paddingTop: '30px' }}>
@@ -63,11 +63,11 @@ const Login = ({ backgroundPrimary, login, isAuthenticated }) => {
 };
 
 Login.propTypes = {
-    backgroundPrimary: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired  
 };
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.isAuthenticated
+    auth: state.auth
 });
 
 export default connect(mapStateToProps, { login })(Login);

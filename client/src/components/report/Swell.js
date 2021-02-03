@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Swell = ({ cardStyle }) => {
+const Swell = () => {
     const swellStyle = {
         marginLeft: '2%',
         marginRight: '2%'
@@ -8,31 +8,31 @@ const Swell = ({ cardStyle }) => {
 
     return (
         <div>
-            <div className="card" style={cardStyle}>
-                    <div className="card-content center">
-                        <span>Swell Direction</span><br></br>
+            <div className="card cardOpacity">
+                    <div className="card-content center flow-text">
+                        <span>Swell Direction (ft)</span><br></br>
                         
                         <span>Primary Swell</span>
                         <div className="row section">
-                            <span className="col s1" style={swellStyle}>2 ft wnw</span>
-                            <span className="col s1" style={swellStyle}>2 ft wnw</span>
-                            <span className="col s1" style={swellStyle}>2 ft wnw</span>
-                            <span className="col s1" style={swellStyle}>2 ft wnw</span>
-                            <span className="col s1" style={swellStyle}>2 ft wnw</span>
-                            <span className="col s1" style={swellStyle}>2 ft wnw</span>
-                            <span className="col s1" style={swellStyle}>2 ft wnw</span>
-                            <span className="col s1" style={swellStyle}>2 ft wnw</span>
+                            <span className="col s1" style={swellStyle}>2 wnw</span>
+                            <span className="col s1" style={swellStyle}>2 wnw</span>
+                            <span className="col s1" style={swellStyle}>2 wnw</span>
+                            <span className="col s1" style={swellStyle}>2 wnw</span>
+                            <span className="col s1" style={swellStyle}>2 wnw</span>
+                            <span className="col s1" style={swellStyle}>2 wnw</span>
+                            <span className="col s1" style={swellStyle}>2 wnw</span>
+                            <span className="col s1" style={swellStyle}>2 wnw</span>
                         </div>
                         <span>Secondary Swell</span>
                         <div className="row section">
-                            <span className="col s1" style={swellStyle}>2 ft w</span>
-                            <span className="col s1" style={swellStyle}>2 ft w</span>
-                            <span className="col s1" style={swellStyle}>2 ft w</span>
-                            <span className="col s1" style={swellStyle}>2 ft w</span>
-                            <span className="col s1" style={swellStyle}>2 ft w</span>
-                            <span className="col s1" style={swellStyle}>2 ft w</span>
-                            <span className="col s1" style={swellStyle}>2 ft w</span>
-                            <span className="col s1" style={swellStyle}>2 ft w</span>
+                            <span className="col s1" style={swellStyle}>2 w</span>
+                            <span className="col s1" style={swellStyle}>2 w</span>
+                            <span className="col s1" style={swellStyle}>2 w</span>
+                            <span className="col s1" style={swellStyle}>2 w</span>
+                            <span className="col s1" style={swellStyle}>2 w</span>
+                            <span className="col s1" style={swellStyle}>2 w</span>
+                            <span className="col s1" style={swellStyle}>2 w</span>
+                            <span className="col s1" style={swellStyle}>2 w</span>
                         </div>
                         <div className="row">
                             <span className="col s1" style={swellStyle}>12am</span>

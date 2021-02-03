@@ -7,22 +7,16 @@ import Swell from '../report/Swell';
 import Wind from '../report/Wind';
 import Tide from '../report/Tide';
 
-const Report = ({ backgroundPrimary }) => {
+const Report = () => {
     const dayBtnStyle = { 
         margin: '5px',
         backgroundColor: '#00838f',
     };
 
-    const cardStye = {
-        opacity: '80%'
-    };
-
-    // backgroundColor: '#b2ebf2', minHeight: '160vh'
-
     return (
         <Fragment>
             <Navbar />
-            <div style={backgroundPrimary} >
+            <div className="backgroundPrimary">
                 <div className="row">
                     <div className="col s12 center">
                         <h4>Trails, Orange County, CA</h4>
@@ -36,11 +30,11 @@ const Report = ({ backgroundPrimary }) => {
                         <button style={dayBtnStyle} className="btn">Wed 11/25</button>
                     </div>
                     <h5>Monday, 11/23/2020</h5>
-                    <Overview cardStyle={cardStye} />
-                    <Waves cardStyle={cardStye}/>
-                    <Swell cardStyle={cardStye}/>
-                    <Wind cardStyle={cardStye}/>
-                    <Tide cardStyle={cardStye}/>
+                    <Overview />
+                    <Waves />
+                    <Swell />
+                    <Wind />
+                    <Tide />
                     
                 </div>
             </div>
