@@ -10,3 +10,7 @@
 .cardOpacity {
     opacity: 80%;
 }
+
+.verticalAlign {
+    vertical-align: middle;
+}
