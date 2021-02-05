@@ -1,80 +1,76 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Navbar from '../../layout/Navbar';
 import Footer from '../../layout/Footer';
+import Loading from '../../layout/Loading';
+import { getSurfSpot } from '../../../redux/actions/surfSpotActions';
 
-const Reports = () => {
+// Data
+import dataCollection from '../../../sampleData/dataCollection.json';
 
-    // // establish dataModel
-    // const reportDataModel = [
-    //     {
-    //         continent: '',
-    //         regions: {
-    //              surfSpots: []
-    //         }
-    //     }
-    // ];
-
-    const newReportData = [
-        {
-            continent: 'North America',
-            regions: {
-                'Southern California': {
-                    surfSpots: ['Trails', 'Trestles']
-                },
-                'Hawaii': {
-                    surfSpots: ['Pipeline', 'Rocky Point']
-                }
-            }
-        },
-        {
-            continent: 'Africa',
-            regions: {
-                'South Africa': {
-                    surfSpots: [`Jeffrey's Bay`, 'Capetown']
-                }, 
-                'Namibia': {
-                    surfSpots: ['Skeleton Bay']
-                }
-            }
-        },
-        {
-            continent: 'Australia',
-            regions: {
-                'Gold Coast': {
-                    surfSpots: [`Margaret River`, 'Snapper Rocks']
-                }, 
-                'Western Australia': {
-                    surfSpots: ['Skeleton Bay']
-                }
-            }
-        },
-        {
-            continent: 'Europe',
-            regions: {
-                'Northwest Europe': {
-                    surfSpots: ['Newquay Fistral North']
-                }
-            }
-        }
-    ];
+const Reports = ({ auth: { loading }, surfSpot: { surfSpot }, getSurfSpot }) => {
 
     const [selectedContinent, setSelectedContinent] = useState('');
+    const [continents, setContinents] = useState([]);
     const [selectedRegion, setSelectedRegion] = useState('');
+    const [regions, setRegions] = useState([]);
+    const [surfSpots, setSurfSpots] = useState([]);
+
+    useEffect(() => {
+        getContinents();
+    }, []);
+
+    // Get continents
+    const getContinents = () => {
+        let continentsList = [];
+        dataCollection.forEach(item => {
+            if (!continentsList.includes(item.continent)) {
+                continentsList.push(item.continent);
+                setContinents(continentsList);
+            }
+        });
+    };
+   
+    // Get regions
+    const getRegions = () => {
+        let regionsList = [];
+        dataCollection.forEach(item => {
+            if (item.continent === selectedContinent) {
+                regionsList.push(item.region);
+                setRegions(regionsList);
+            }
+        })
+    };
+
+    // Get surfSpots
+    const getSurfSpots = () => {
+        let surfSpotList = [];
+        dataCollection.forEach(item => {
+            if (item.region === selectedRegion) {
+                surfSpotList.push(item.name);
+                setSurfSpots(surfSpotList);
+            }
+        })
+    };
         
 
-    const onClickContinent = (e) => {
+    const onClickContinent = e => {
         e.preventDefault();
         setSelectedContinent(e.target.text);
-        setSelectedRegion('');
+        setRegions([]);
+        setSurfSpots([]);
+        getRegions();
     };
 
-    const onClickRegion = (e) => {
+    const onClickRegion = e => {
         e.preventDefault();
         setSelectedRegion(e.target.text);
+        setSurfSpots([]);
+        getSurfSpots();
     };
 
-    return (
+    return loading ? <Loading /> :
         <Fragment>
             <Navbar />
             <div className="backgroundPrimary">
@@ -85,43 +81,33 @@ const Reports = () => {
                             <div className="row">
                                 <div className="section col s4">
                                     <ul>
-                                        <h6>Continents</h6>
-                                        {newReportData.map((item, index) => (
+                                        <h6>Continents / Islands</h6>
+                                        {continents.map((item, index) => (
                                             <li key={index}>
-                                                <a href="#!" onClick={(e) => onClickContinent(e)}>{item.continent}</a>
+                                                <a href="#!" onClick={(e) => onClickContinent(e)}>{item}</a>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
-                                {selectedContinent !== '' && (
-                                    <div className="section col s4">
+                                {selectedContinent && (
+                                <div className="section col s4">
                                     <ul>
                                         <h6>Regions</h6>
-                                        {newReportData.map((item) => (
-                                            item.continent === selectedContinent && (
-                                                Object.keys(item.regions).map((item, index) => (
-                                                    <li key={index}>
-                                                        <a href="#!" onClick={(e) => onClickRegion(e)}>{item}</a>
-                                                    </li>
-                                                ))
-                                            )
+                                        {regions.map((item, index) => (
+                                            <li key={index}>
+                                                <a href="#!" onClick={(e) => onClickRegion(e)}>{item}</a>
+                                            </li>
                                         ))}
                                     </ul>
                                 </div>)}
-                                {selectedRegion !== '' && (
+                                {selectedRegion && (
                                     <div className="section col s4">
                                         <ul>
                                             <h6>Surf Spots</h6>
-                                            {newReportData.map(item => (
-                                                Object.keys(item.regions).map(region => (
-                                                    region === selectedRegion && (
-                                                        item.regions[region].surfSpots.map((surfSpot, index) => (
-                                                            <li key={index}>
-                                                                <Link to="/report">{surfSpot}</Link>
-                                                            </li>
-                                                        ))
-                                                    )
-                                                ))
+                                            {surfSpots.map((item, index) => (
+                                                <li key={index}>
+                                                    <Link onClick={getSurfSpot} to="/report">{item}</Link>
+                                                </li>           
                                             ))}
                                         </ul>
                                     </div>
@@ -133,7 +119,11 @@ const Reports = () => {
                 </div>
             <Footer />
         </Fragment>
-    )
 };
 
-export default Reports;
+const mapStateToProps = state => ({
+    auth: state.auth,
+    surfSpot: state.surfSpot
+});
+
+export default connect(mapStateToProps, {getSurfSpot})(Reports);

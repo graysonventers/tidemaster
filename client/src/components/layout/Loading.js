@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loading = () => {
     return (
-        <div className="preloader-wrapper big active">
+        <div style={{ margin: 'auto', display: 'block' }} className="preloader-wrapper big active">
             <div className="spinner-layer spinner-blue-only">
                 <div className="circle-clipper left">
                     <div className="circle"></div>

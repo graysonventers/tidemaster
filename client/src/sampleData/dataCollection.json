@@ -2093,8 +2093,8 @@
     },
     {"name": "Pipeline",
     "surfSpotId": 616,
-    "continent": "North America",
-    "region": "Hawaii",
+    "continent": "Hawaii",
+    "region": "O'ahu",
     "reports": [
         {
             "timestamp": 1594116000,
@@ -6869,7 +6869,7 @@
         }
     ]},
     {
-        "name": "trestles",
+        "name": "Trestles",
         "surfSpotId": 291,
         "continent": "North America",
         "region": "Southern California",

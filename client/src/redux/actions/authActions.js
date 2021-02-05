@@ -25,12 +25,10 @@ export const loadUser = () => async dispatch => {
         dispatch({ type: LOAD_USER, payload: res.data });
 
     } catch (err) {
-
-        if(err) {
-            console.log(err);
-        }
-
+        
+        
         dispatch({ type: LOAD_USER_FAIL })
+
     }
 };
 
