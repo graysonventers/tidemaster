@@ -9,7 +9,7 @@ import { getSurfSpot } from '../../../redux/actions/surfSpotActions';
 // Data
 import dataCollection from '../../../sampleData/dataCollection.json';
 
-const Reports = ({ auth: { loading }, surfSpot: { surfSpot }, getSurfSpot }) => {
+const Reports = ({ auth: { loading }, getSurfSpot }) => {
 
     const [selectedContinent, setSelectedContinent] = useState('');
     const [continents, setContinents] = useState([]);
@@ -36,19 +36,21 @@ const Reports = ({ auth: { loading }, surfSpot: { surfSpot }, getSurfSpot }) => 
     const getRegions = () => {
         let regionsList = [];
         dataCollection.forEach(item => {
-            if (item.continent === selectedContinent) {
+            if (item.continent === selectedContinent && !regionsList.includes(item.region)) {
                 regionsList.push(item.region);
                 setRegions(regionsList);
             }
         })
     };
 
+    
+
     // Get surfSpots
     const getSurfSpots = () => {
         let surfSpotList = [];
         dataCollection.forEach(item => {
             if (item.region === selectedRegion) {
-                surfSpotList.push(item.name);
+                surfSpotList.push({name: item.name, surfSpotId: item.surfSpotId});
                 setSurfSpots(surfSpotList);
             }
         })
@@ -70,6 +72,11 @@ const Reports = ({ auth: { loading }, surfSpot: { surfSpot }, getSurfSpot }) => 
         getSurfSpots();
     };
 
+    const onClickSurfSpot = (e) => {
+        // getSurfSpot(e.target.id);
+        console.log('hello test me')
+    };
+
     return loading ? <Loading /> :
         <Fragment>
             <Navbar />
@@ -84,7 +91,7 @@ const Reports = ({ auth: { loading }, surfSpot: { surfSpot }, getSurfSpot }) => 
                                         <h6>Continents / Islands</h6>
                                         {continents.map((item, index) => (
                                             <li key={index}>
-                                                <a href="#!" onClick={(e) => onClickContinent(e)}>{item}</a>
+                                                <a href="#!" className="reportsBtn" onClick={(e) => onClickContinent(e)}>{item}</a>
                                             </li>
                                         ))}
                                     </ul>
@@ -106,7 +113,10 @@ const Reports = ({ auth: { loading }, surfSpot: { surfSpot }, getSurfSpot }) => 
                                             <h6>Surf Spots</h6>
                                             {surfSpots.map((item, index) => (
                                                 <li key={index}>
-                                                    <Link onClick={getSurfSpot} to="/report">{item}</Link>
+                                                        <Link to={`/reports/${item.surfSpotId}`} 
+                                                            id={item.surfSpotId} 
+                                                            onClick={e => onClickSurfSpot(e)}>
+                                                                {item.name}</Link>
                                                 </li>           
                                             ))}
                                         </ul>

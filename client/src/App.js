@@ -34,8 +34,8 @@ function App() {
         <Router>
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/report">
-              <Report />
+            <Route exact path="/reports/:id" component={Report}>
+              
             </Route>
             <Route exact path="/search">
               <Search />

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import auth from './auth';
-import surfSpot from './surfSpot';
+import surf from './surf';
 
 export default combineReducers({
     auth,
-    surfSpot
+    surf
 });
