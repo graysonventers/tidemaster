@@ -11,13 +11,11 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-auth-token");
     next();
-  });
+});
   
 app.use(bodyParser.json());
 
-
-const port = process.env.port || 5000;
-
+const port = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
     res.send(`Server is running on port ${port}`)
@@ -27,7 +25,6 @@ app.get('/', (req, res) => {
 // Register and Login User Routes
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
-
 
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`)

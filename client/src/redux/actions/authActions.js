@@ -25,10 +25,7 @@ export const loadUser = () => async dispatch => {
         dispatch({ type: LOAD_USER, payload: res.data });
 
     } catch (err) {
-        
-        
         dispatch({ type: LOAD_USER_FAIL })
-
     }
 };
 
@@ -36,7 +33,7 @@ export const loadUser = () => async dispatch => {
 export const register = ({ name, email, password }) => async dispatch => {
     const config = {
         method: 'post',
-        url: 'http://localhost:5000/api/users',
+        url: 'http:localhost:5000/api/users',
         data: { name, email, password },
         headers: {'Content-Type': 'application/json'}
     };

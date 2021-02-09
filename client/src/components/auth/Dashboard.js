@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
@@ -6,8 +6,12 @@ import Loading from '../layout/Loading';
 import PropTypes from 'prop-types';
 import DashboardNoSpots from './DashboardNoSpots';
 import DashboardSpots from './DashboardSpots';
+import { getSurfSpots } from '../../redux/actions/surfSpotActions';
 
-const Dashboard = ({ auth: { user } }) => {
+const Dashboard = ({ auth: { user }, getSurfSpots }) => {
+    useEffect(() => {
+        getSurfSpots();
+    }, [getSurfSpots]);
 
     return user === null ? (<Loading />) :  
         (
@@ -28,7 +32,8 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    surf: state.surf
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, {getSurfSpots})(Dashboard);

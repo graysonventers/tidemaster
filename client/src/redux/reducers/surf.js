@@ -1,5 +1,6 @@
 import {
     CLEAR_SURF_SPOT,
+    CLEAR_SURF_SPOTS,
     GET_SURF_SPOT,
     GET_SURF_SPOTS,
     LOAD_SURF_SPOT_FAIL
@@ -32,6 +33,12 @@ export default function surf (state = initialState, action) {
             return {
                 ...state,
                 surfSpot: null,
+                loading: false
+            }
+        case CLEAR_SURF_SPOTS:
+            return {
+                ...state,
+                surfSpots: null,
                 loading: false
             }
         case LOAD_SURF_SPOT_FAIL:

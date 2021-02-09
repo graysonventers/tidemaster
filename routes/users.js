@@ -9,9 +9,10 @@ const auth = require('../middleware/auth');
 const User = require('../models/User');
 
 // ROUTES WITHIN HERE:
-    // Register User
-    // Add favoriteSpot to user model
-    // Remove favoriteSpot from user model
+    // Register User POST
+    // Get all user's favoriteSpots GET 
+    // Add favoriteSpot to user model PUT
+    // Remove favoriteSpot from user model DELETE
 
 // @route   POST /api/users
 // @desc    Register a user
@@ -75,8 +76,26 @@ router.post('/', [
     }
 });
 
+// @route   GET /api/users
+// @desc    Get all user's favoriteSpots
+// @access  Private
+
+router.get('/', auth, async (req, res) => {
+    try {
+        let user = await User.findById(req.user.id);
+
+        if (user.favoriteSpots.length <= 0) return res.send('User does not have any favorite spots saved');
+
+        res.json(user.favoriteSpots);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send(err.message);
+    }
+});
+
 // @route   PUT /api/users
-// @desc    Add favorites to User model
+// @desc    Add single favoriteSpot to User model
 // @access  Private
 
 // Notes: must send data to server as "favoriteSpots": "spot"
