@@ -72,11 +72,6 @@ const Reports = ({ auth: { loading }, getSurfSpot }) => {
         getSurfSpots();
     };
 
-    const onClickSurfSpot = (e) => {
-        // getSurfSpot(e.target.id);
-        console.log('hello test me')
-    };
-
     return loading ? <Loading /> :
         <Fragment>
             <Navbar />
@@ -114,8 +109,7 @@ const Reports = ({ auth: { loading }, getSurfSpot }) => {
                                             {surfSpots.map((item, index) => (
                                                 <li key={index}>
                                                         <Link to={`/reports/${item.surfSpotId}`} 
-                                                            id={item.surfSpotId} 
-                                                            onClick={e => onClickSurfSpot(e)}>
+                                                            id={item.surfSpotId}>
                                                                 {item.name}</Link>
                                                 </li>           
                                             ))}

@@ -9,17 +9,21 @@ import Tide from '../report/Tide';
 import Loading from '../layout/Loading';
 import { connect } from 'react-redux';
 import { getSurfSpot } from '../../redux/actions/surfSpotActions';
+import { Redirect } from 'react-router-dom';
 
-const Report = ({ surf, surf: { surfSpot }, match, getSurfSpot }) => {
+const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getSurfSpot }) => {
     
     useEffect(() => {
         getSurfSpot(match.params.id);
     }, [getSurfSpot, match.params.id]);
 
+    // eslint-disable-next-line
+    if (!loading && surfSpot === null || surfSpot === undefined) return <Redirect to="/notfound" />
+
     const dayBtnStyle = { 
         margin: '5px',
         backgroundColor: '#00838f'
-    };
+    };    
 
     return surf.loading ? (<Loading />) : (
         <Fragment>
@@ -29,7 +33,10 @@ const Report = ({ surf, surf: { surfSpot }, match, getSurfSpot }) => {
                     <div className="col s12 center">
                         <h4>{surfSpot.name}</h4>
                         <h5>{surfSpot.region}, {surfSpot.continent}</h5>
-                        <button className="center btn btn-small cyan darken-3">Add to Favorites</button>
+                        {(user !== null) && 
+                            (user.favoriteSpots.includes(surfSpot.surfSpotId.toString()) ? 
+                            (<button className="center btn btn-small cyan darken-3">Delete from Favorites</button>)
+                             : (<button className="center btn btn-small cyan darken-3">Add to Favorites</button>))}
                     </div>
                 </div>
                 <div className="container">
@@ -52,7 +59,8 @@ const Report = ({ surf, surf: { surfSpot }, match, getSurfSpot }) => {
 };
 
 const mapStateToProps = state => ({
-    surf: state.surf
+    surf: state.surf,
+    auth: state.auth
 });
 
 export default connect(mapStateToProps, { getSurfSpot })(Report);

@@ -2,15 +2,19 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { getSurfSpots } from '../../redux/actions/surfSpotActions';
 
 
 class DashboardSpots extends Component {
-    
+
+    componentDidMount() {
+        this.props.getSurfSpots();
+    };
+
     deleteFavoriteSpot = e => {
         e.preventDefault();
 
         // call deleteFavorites action
-
 
         console.log(e.currentTarget.id);
         // console.log('favoriteSpot deleted');
@@ -28,14 +32,14 @@ class DashboardSpots extends Component {
 
     render() {
         return (<Fragment>
-            {this.props.spots.map((spot, index) => {
+            {this.props.surf.surfSpots.map((spot, index) => {
                 
                 return <div key={index} className="container" style={{ paddingTop: '5%' }}>
-                <Link to="/reports/:id">
+                <Link to={`/reports/${spot.surfSpotId}`}>
                     <div className="card hoverable black-text center cardOpacity" style={{ height: '80px' }}>
-                        
+
                         <div className="row card-content" style={{ height: '100%' }}>
-                            <div id="surfSpotName" style={{ marginTop: '14px', fontSize: '35px' }} className="col s3">{spot}</div>
+                            <div id="surfSpotName" style={{ marginTop: '14px', fontSize: '35px' }} className="col s3">{spot.name}</div>
                             <div style={{ marginTop: '25px', fontSize: '20px' }} className="col s3">3-4 ft</div>
                             <div style={{ marginTop: '25px', fontSize: '20px' }} className="col s4">Fair to Good</div>
                             
@@ -55,11 +59,13 @@ class DashboardSpots extends Component {
 };
 
 DashboardSpots.propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    surf: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    surf: state.surf
 });
 
-export default connect(mapStateToProps)(DashboardSpots);
+export default connect(mapStateToProps, {getSurfSpots})(DashboardSpots);

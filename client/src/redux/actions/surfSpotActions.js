@@ -44,11 +44,9 @@ export const getSurfSpots = () => async dispatch => {
                     updatedRes.push(item);
                 }
             })
-        })
-
-        console.log(updatedRes);
+        });
         
-        dispatch({ type: GET_SURF_SPOTS, payload: res.data });
+        dispatch({ type: GET_SURF_SPOTS, payload: updatedRes });
 
     } catch (err) {
         dispatch({ type: LOAD_SURF_SPOT_FAIL })    
