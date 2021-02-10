@@ -21,8 +21,6 @@ class DashboardSpots extends Component {
     deleteFavoriteSpotClick = e => {
         e.preventDefault();
         this.props.deleteFavoriteSpot(parseInt(e.currentTarget.id));
-
-        console.log(typeof e.currentTarget.id);
     };
 
     render() {

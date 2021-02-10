@@ -8,17 +8,13 @@ import DashboardNoSpots from './DashboardNoSpots';
 import DashboardSpots from './DashboardSpots';
 
 const Dashboard = ({ auth: { user } }) => {
-    const checkFavoriteSpots = () => user.favoriteSpots.length ? true : false;
-
-   
-   
 
     return user === null ? (<Loading />) :  
         (
         <Fragment>
             <Navbar />
             <div className="center backgroundPrimary"> 
-                {checkFavoriteSpots() ? 
+                {user.favoriteSpots.length ? 
                     <DashboardSpots spots={user.favoriteSpots}/> : 
                     <DashboardNoSpots />}                
             </div>

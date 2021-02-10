@@ -132,7 +132,6 @@ export const deleteFavoriteSpot = id => async dispatch => {
 
     try {
         const res = await axios(config);
-        console.log(res.data);
 
         dispatch({ type: DELETE_FAVORITE_SPOT, payload: res.data })
     } catch (error) {

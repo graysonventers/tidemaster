@@ -6,7 +6,7 @@ import Footer from '../layout/Footer';
 import PropTypes from 'prop-types';
 import { register } from '../../redux/actions/authActions';
 
-const Register = ({ backgroundPrimary, register, isAuthenticated }) => {
+const Register = ({ register, auth: { isAuthenticated } }) => {
 
     const [formData, setFormData] = useState({
         name: '',
