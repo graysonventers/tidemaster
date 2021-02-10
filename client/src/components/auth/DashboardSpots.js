@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getSurfSpots } from '../../redux/actions/surfSpotActions';
+import { deleteFavoriteSpot } from '../../redux/actions/authActions';
 
 
 class DashboardSpots extends Component {
@@ -11,23 +12,17 @@ class DashboardSpots extends Component {
         this.props.getSurfSpots();
     };
 
-    deleteFavoriteSpot = e => {
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.auth.user.favoriteSpots !== this.props.auth.user.favoriteSpots) {
+            this.props.getSurfSpots();
+        }
+    };
+
+    deleteFavoriteSpotClick = e => {
         e.preventDefault();
+        this.props.deleteFavoriteSpot(parseInt(e.currentTarget.id));
 
-        // call deleteFavorites action
-
-        console.log(e.currentTarget.id);
-        // console.log('favoriteSpot deleted');
-
-        // console.log(this.props.auth.user.favoriteSpots);
-        
-        // THIS SHOULD ALL BE DONE IN ACTION
-        // Delete surfSpot from user's favorites
-        // const index = this.props.auth.user.favoriteSpots.indexOf(e.target.id);
-        // this.props.auth.user.favoriteSpots.splice(index, 1);
-
-        // // update database with delete favoriteSpots action
-        // return this.props.auth.user.favoriteSpots;
+        console.log(typeof e.currentTarget.id);
     };
 
     render() {
@@ -44,7 +39,7 @@ class DashboardSpots extends Component {
                             <div style={{ marginTop: '25px', fontSize: '20px' }} className="col s4">Fair to Good</div>
                             
                             <div style={{ marginTop: '25px' }} className="col s1 offset-s1">
-                                <button id="deleteButton" onClick={e => this.deleteFavoriteSpot(e)} style={{ color: '#ee6e73', background: 'none', border: 'none' }}>
+                                <button id={spot.surfSpotId} onClick={e => this.deleteFavoriteSpotClick(e)} style={{ color: '#ee6e73', background: 'none', border: 'none' }}>
                                     <i className="material-icons small">clear</i>
                                 </button>
                             </div>
@@ -68,4 +63,4 @@ const mapStateToProps = state => ({
     surf: state.surf
 });
 
-export default connect(mapStateToProps, {getSurfSpots})(DashboardSpots);
+export default connect(mapStateToProps, {getSurfSpots, deleteFavoriteSpot})(DashboardSpots);

@@ -5,7 +5,9 @@ import {
     LOAD_USER,
     LOGIN_FAIL,
     REGISTER_FAIL,
-    LOAD_USER_FAIL
+    LOAD_USER_FAIL,
+    ADD_FAVORITE_SPOT,
+    DELETE_FAVORITE_SPOT
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -33,6 +35,13 @@ export default function auth (state = initialState, action) {
                ...state,
                ...payload,
                isAuthenticated: true,
+               loading: false
+           }
+        case ADD_FAVORITE_SPOT:
+        case DELETE_FAVORITE_SPOT:
+           return {
+               ...state,
+               user: payload,
                loading: false
            }
         case LOGOUT:

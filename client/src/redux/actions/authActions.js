@@ -7,7 +7,10 @@ import {
     LOGOUT,
     LOGIN_FAIL,
     REGISTER_FAIL,
-    LOAD_USER_FAIL
+    LOAD_USER_FAIL,
+    ADD_FAVORITE_SPOT,
+    DELETE_FAVORITE_SPOT,
+    UPDATE_FAVORITE_SPOT_FAIL
 } from './actionTypes';
 
 // Load User
@@ -24,7 +27,7 @@ export const loadUser = () => async dispatch => {
 
         dispatch({ type: LOAD_USER, payload: res.data });
 
-    } catch (err) {
+    } catch (error) {
         dispatch({ type: LOAD_USER_FAIL })
     }
 };
@@ -33,7 +36,7 @@ export const loadUser = () => async dispatch => {
 export const register = ({ name, email, password }) => async dispatch => {
     const config = {
         method: 'post',
-        url: 'http:localhost:5000/api/users',
+        url: 'http://localhost:5000/api/users',
         data: { name, email, password },
         headers: {'Content-Type': 'application/json'}
     };
@@ -44,11 +47,11 @@ export const register = ({ name, email, password }) => async dispatch => {
         dispatch({ type: REGISTER, payload: res.data })
         dispatch(loadUser());
         
-    } catch (err) {
-        const errors = err.response.data.errors;
+    } catch (error) {
 
-        if(errors) {
-            errors.forEach(error => console.log(error));
+        if (error.response) {
+            console.log(error.response.data.message)
+            alert(error.response.data.message);
         }
 
         dispatch({ type: REGISTER_FAIL })
@@ -70,10 +73,11 @@ export const login = ({ email, password }) => async dispatch => {
         dispatch({ type: LOGIN, payload: res.data });
         dispatch(loadUser());
         
-    } catch (err) {
+    } catch (error) {
 
-        if(err) {
-            console.log(err.message);
+        if (error.response) {
+            console.log(error.response.data.message)
+            alert(error.response.data.message);
         }
         dispatch({ type: LOGIN_FAIL })
     }
@@ -83,4 +87,60 @@ export const login = ({ email, password }) => async dispatch => {
 
 export const logout = () => dispatch => {
     dispatch({ type: LOGOUT });
+};
+
+// Add surfSpot to user's favoriteSpots
+export const addFavoriteSpot = id => async dispatch => {
+    const stringId = id.toString();
+    const config = {
+        method: 'put',
+        url: 'http://localhost:5000/api/users',
+        data: { favoriteSpots: stringId },
+        headers: {
+            'x-auth-token': [localStorage.token],
+            'Content-Type': 'application/json'
+        }
+    }
+
+    try {
+        const res = await axios(config);
+        dispatch({ type: ADD_FAVORITE_SPOT, payload: res.data })
+
+    } catch (error) {
+        if (error.response) {
+            console.log(error.response.data.message)
+            alert(error.response.data.message);
+        }
+
+        dispatch({ type: UPDATE_FAVORITE_SPOT_FAIL });
+    }
+};
+
+
+// Delete surfSpot from user's favoriteSpots
+export const deleteFavoriteSpot = id => async dispatch => {
+    const stringId = id.toString();
+    const config = {
+        method: 'delete',
+        url: 'http://localhost:5000/api/users',
+        data: { favoriteSpots: stringId },
+        headers: {
+            'x-auth-token': [localStorage.token],
+            'Content-Type': 'application/json'
+        }
+    }
+
+    try {
+        const res = await axios(config);
+        console.log(res.data);
+
+        dispatch({ type: DELETE_FAVORITE_SPOT, payload: res.data })
+    } catch (error) {
+        if (error.response) {
+            console.log(error.response.data.message)
+            alert(error.response.data.message);
+        }
+
+        dispatch({ type: UPDATE_FAVORITE_SPOT_FAIL })
+    }
 };

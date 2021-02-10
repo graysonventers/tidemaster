@@ -133,7 +133,7 @@ router.delete('/', auth, async (req, res) => {
 
         await user.save();
         
-        res.send('Favorite Spot Deleted');
+        res.json(user);
 
     } catch (err) {
         console.error(err.message);

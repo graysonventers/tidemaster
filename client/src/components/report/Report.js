@@ -10,8 +10,9 @@ import Loading from '../layout/Loading';
 import { connect } from 'react-redux';
 import { getSurfSpot } from '../../redux/actions/surfSpotActions';
 import { Redirect } from 'react-router-dom';
+import { addFavoriteSpot, deleteFavoriteSpot } from '../../redux/actions/authActions';
 
-const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getSurfSpot }) => {
+const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getSurfSpot, addFavoriteSpot, deleteFavoriteSpot }) => {
     
     useEffect(() => {
         getSurfSpot(match.params.id);
@@ -33,10 +34,10 @@ const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getS
                     <div className="col s12 center">
                         <h4>{surfSpot.name}</h4>
                         <h5>{surfSpot.region}, {surfSpot.continent}</h5>
-                        {(user !== null) && 
-                            (user.favoriteSpots.includes(surfSpot.surfSpotId.toString()) ? 
-                            (<button className="center btn btn-small cyan darken-3">Delete from Favorites</button>)
-                             : (<button className="center btn btn-small cyan darken-3">Add to Favorites</button>))}
+                        {(user !== null) && (user.favoriteSpots &&
+                            user.favoriteSpots.includes(surfSpot.surfSpotId.toString()) ? 
+                            (<button onClick={() => deleteFavoriteSpot(surfSpot.surfSpotId)} className="center btn btn-small cyan darken-3">Delete from Favorites</button>)
+                             : (<button onClick={() => addFavoriteSpot(surfSpot.surfSpotId)} className="center btn btn-small cyan darken-3">Add to Favorites</button>))}
                     </div>
                 </div>
                 <div className="container">
@@ -63,4 +64,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { getSurfSpot })(Report);
+export default connect(mapStateToProps, { getSurfSpot, addFavoriteSpot, deleteFavoriteSpot })(Report);

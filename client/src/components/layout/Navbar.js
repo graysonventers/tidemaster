@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import M from 'materialize-css';
 import { logout } from '../../redux/actions/authActions';
 
-const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
     useEffect(() => {
         const sideNav = document.querySelector('.sidenav');
         M.Sidenav.init(sideNav, {});
@@ -29,7 +29,7 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
                                 <li>
                                     <Link to="/search">Search</Link>
                                 </li>
-                                {isAuthenticated ? 
+                                {isAuthenticated && !loading ? 
                                     (<Fragment>
                                         <li>
                                             <Link to="/dashboard">Dashboard</Link>
