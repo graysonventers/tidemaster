@@ -20,34 +20,64 @@ class DashboardSpots extends Component {
 
     deleteFavoriteSpotClick = e => {
         e.preventDefault();
-        this.props.deleteFavoriteSpot(parseInt(e.currentTarget.id));
+        this.props.deleteFavoriteSpot(e.currentTarget.id);
+    };
+
+    getWaveHeight = (spot) => {
+        const minHeight = spot.reports[0].swell.minBreakingHeight;
+        const maxHeight = spot.reports[0].swell.maxBreakingHeight;
+        return `${minHeight} - ${maxHeight}`;
+    };
+
+    getWaveQuality = (spot) => {
+        const fadedRating = spot.reports[0].fadedRating;
+        const solidRating = spot.reports[0].solidRating;
+        const averageRating = fadedRating + solidRating / 2;
+       
+        switch (true) {
+            case (averageRating >= 4):
+                return 'Good';
+            case (averageRating >= 3 && averageRating < 4):
+                return 'Fair';
+            case (averageRating >= 2 && averageRating < 3):
+                return 'Poor to Fair';
+            case (averageRating < 2):
+                return 'Poor';
+            default:
+                return 'Hoping for good!';
+        }
     };
 
     render() {
         return (<Fragment>
             {this.props.surf.surfSpots.map((spot, index) => {
-                
-                return <div key={index} className="container" style={{ paddingTop: '5%' }}>
-                <Link to={`/reports/${spot.surfSpotId}`}>
-                    <div className="card hoverable black-text center cardOpacity" style={{ height: '80px' }}>
-
-                        <div className="row card-content" style={{ height: '100%' }}>
-                            <div id="surfSpotName" style={{ marginTop: '14px', fontSize: '35px' }} className="col s3">{spot.name}</div>
-                            <div style={{ marginTop: '25px', fontSize: '20px' }} className="col s3">3-4 ft</div>
-                            <div style={{ marginTop: '25px', fontSize: '20px' }} className="col s4">Fair to Good</div>
-                            
-                            <div style={{ marginTop: '25px' }} className="col s1 offset-s1">
-                                <button id={spot.surfSpotId} onClick={e => this.deleteFavoriteSpotClick(e)} style={{ color: '#ee6e73', background: 'none', border: 'none' }}>
-                                    <i className="material-icons small">clear</i>
-                                </button>
+                return <div key={index} className="row section">
+                    <div className="col s10 offset-s1">
+                        <Link to={`/reports/${spot.surfSpotId}`}>
+                            <div className="card hoverable horizontal cardOpacity dashboardCard valign-wrapper">
+                                <div className="col s3">
+                                    <h5 className="flow-text">{spot.name}</h5>
+                                </div>
+                                <div className="col s3">
+                                    <h6 className="">{this.getWaveHeight(spot)} ft</h6>
+                                </div>
+                                <div className="col s3">
+                                    <h6>{this.getWaveQuality(spot)}</h6>
+                                </div>
+                                <div className="col s3">
+                                    <button 
+                                        id={spot.surfSpotId} 
+                                        onClick={e => this.deleteFavoriteSpotClick(e)} 
+                                        className="deleteButton right">
+                                            <i className="material-icons small verticalAlign">clear</i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
-                </Link>
-            </div>
+                </div>    
             })}
-        </Fragment>
-        )
+        </Fragment>)
     }
 };
 

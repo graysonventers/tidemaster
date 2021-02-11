@@ -11,6 +11,42 @@
     opacity: 80%;
 }
 
+.dashboardCard {
+    height: 100px;
+    color: #000;
+    margin-top: 50px;
+}
+
+.dashboardCard div {
+    overflow: hidden;
+}
+
 .verticalAlign {
     vertical-align: middle;
 }
+
+.deleteButton {
+    color: #ee6e73;
+    background: none; 
+    border: none;
+}
+
+.deleteButton:focus {
+    color: #ee6e73;
+    background: none; 
+    border: none;
+}
+
+.deleteButton:hover {
+    color: #000;
+    background: none; 
+    border: none;
+}
+
+/* @media (max-width: 500px) {
+    .dashboardCard {
+        width: 500px;
+    }
+} */
+
+

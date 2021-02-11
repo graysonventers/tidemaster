@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 import Navbar from '../../layout/Navbar';
 import Footer from '../../layout/Footer';
 import Loading from '../../layout/Loading';
-import { getSurfSpot } from '../../../redux/actions/surfSpotActions';
 
 // Data
 import dataCollection from '../../../sampleData/dataCollection.json';
 
-const Reports = ({ auth: { loading }, getSurfSpot }) => {
+const Reports = ({ auth: { loading } }) => {
 
     const [selectedContinent, setSelectedContinent] = useState('');
     const [continents, setContinents] = useState([]);
@@ -27,7 +26,7 @@ const Reports = ({ auth: { loading }, getSurfSpot }) => {
         dataCollection.forEach(item => {
             if (!continentsList.includes(item.continent)) {
                 continentsList.push(item.continent);
-                setContinents(continentsList);
+                setContinents(continentsList.sort());
             }
         });
     };
@@ -38,12 +37,10 @@ const Reports = ({ auth: { loading }, getSurfSpot }) => {
         dataCollection.forEach(item => {
             if (item.continent === selectedContinent && !regionsList.includes(item.region)) {
                 regionsList.push(item.region);
-                setRegions(regionsList);
+                setRegions(regionsList.sort());
             }
         })
     };
-
-    
 
     // Get surfSpots
     const getSurfSpots = () => {
@@ -55,13 +52,17 @@ const Reports = ({ auth: { loading }, getSurfSpot }) => {
             }
         })
     };
-        
 
     const onClickContinent = e => {
+        // prevent navigation to link
         e.preventDefault();
+        // set state to continent clicked
         setSelectedContinent(e.target.text);
+        // set regions state to empty array to clear out unwanted list in DOM
         setRegions([]);
+        // set surfSpots state to empty array to clear out unwanted list in DOM
         setSurfSpots([]);
+        // call getRegions function that checks if selectedContinent exists, if so, sets regions to state
         getRegions();
     };
 
@@ -130,4 +131,4 @@ const mapStateToProps = state => ({
     surfSpot: state.surfSpot
 });
 
-export default connect(mapStateToProps, {getSurfSpot})(Reports);
+export default connect(mapStateToProps)(Reports);
