@@ -9,7 +9,7 @@ import NotFound from './components/pages/NotFound';
 import About from './components/pages/About';
 import Support from './components/pages/Support';
 import Search from './components/pages/Search';
-import Reports from './components/pages/reports/Reports';
+import Reports from './components/pages/Reports2';
 import Dashboard from './components/auth/Dashboard';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
