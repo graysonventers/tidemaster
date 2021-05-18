@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Navbar from '../../layout/Navbar';
-import Footer from '../../layout/Footer';
-import Loading from '../../layout/Loading';
+import Navbar from '../layout/Navbar';
+import Footer from '../layout/Footer';
+import Loading from '../layout/Loading';
 
 // Data
-import dataCollection from '../../../sampleData/dataCollection.json';
+import dataCollection from '../../sampleData/dataCollection.json';
 
 const Reports = ({ auth: { loading } }) => {
 
@@ -26,16 +26,16 @@ const Reports = ({ auth: { loading } }) => {
         dataCollection.forEach(item => {
             if (!continentsList.includes(item.continent)) {
                 continentsList.push(item.continent);
-                setContinents(continentsList.sort());
+                setContinents(continentsList);
             }
         });
     };
    
     // Get regions
-    const getRegions = () => {
+    const getRegions = (continentParam) => {
         let regionsList = [];
         dataCollection.forEach(item => {
-            if (item.continent === selectedContinent && !regionsList.includes(item.region)) {
+            if (item.continent === continentParam && !regionsList.includes(item.region)) {
                 regionsList.push(item.region);
                 setRegions(regionsList.sort());
             }
@@ -43,34 +43,29 @@ const Reports = ({ auth: { loading } }) => {
     };
 
     // Get surfSpots
-    const getSurfSpots = () => {
+    const getSurfSpots = (regionParam) => {
         let surfSpotList = [];
         dataCollection.forEach(item => {
-            if (item.region === selectedRegion) {
+            if (item.region === regionParam) {
                 surfSpotList.push({name: item.name, surfSpotId: item.surfSpotId});
                 setSurfSpots(surfSpotList);
             }
         })
     };
 
-    const onClickContinent = e => {
-        // prevent navigation to link
+    function onClickContinent (e) {
         e.preventDefault();
-        // set state to continent clicked
-        setSelectedContinent(e.target.text);
-        // set regions state to empty array to clear out unwanted list in DOM
         setRegions([]);
-        // set surfSpots state to empty array to clear out unwanted list in DOM
         setSurfSpots([]);
-        // call getRegions function that checks if selectedContinent exists, if so, sets regions to state
-        getRegions();
+        setSelectedContinent(e.target.text);
+        getRegions(e.target.text);
     };
 
     const onClickRegion = e => {
         e.preventDefault();
-        setSelectedRegion(e.target.text);
         setSurfSpots([]);
-        getSurfSpots();
+        setSelectedRegion(e.target.text);
+        getSurfSpots(e.target.text);
     };
 
     return loading ? <Loading /> :
