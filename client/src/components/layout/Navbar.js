@@ -3,12 +3,18 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import M from 'materialize-css';
 import { logout } from '../../redux/actions/authActions';
+import { clearSurfSpots } from '../../redux/actions/surfSpotActions';
 
-const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, user, loading }, logout, clearSurfSpots }) => {
     useEffect(() => {
         const sideNav = document.querySelector('.sidenav');
         M.Sidenav.init(sideNav, {});
     });
+
+    const onLogOut = () => {
+        logout();
+        clearSurfSpots();
+    }
 
     return (
         <Fragment>
@@ -35,7 +41,7 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
                                             <Link to="/dashboard">Dashboard</Link>
                                         </li>
                                         <li>
-                                            <Link to="/" onClick={() => logout()}>Logout</Link>
+                                            <Link to="/" onClick={() => onLogOut()}>Logout</Link>
                                         </li>
                                         <li>
                                             <span><b>{user.name}</b></span>
@@ -66,7 +72,7 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
                         <Link className="white-text" to="/dashboard">Dashboard</Link>
                     </li>
                     <li>
-                        <Link className="white-text" to="/" onClick={() => logout()}>Logout</Link>
+                        <Link className="white-text" to="/" onClick={() => onLogOut()}>Logout</Link>
                     </li>
                 </Fragment>) : (<Fragment>
                     <li>
@@ -82,7 +88,8 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    surf: state.surf
 })
 
-export default connect(mapStateToProps, {logout})(Navbar);
+export default connect(mapStateToProps, {logout, clearSurfSpots})(Navbar);
