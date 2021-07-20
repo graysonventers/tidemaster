@@ -86,6 +86,8 @@ export const login = ({ email, password }) => async dispatch => {
 // Logout User
 
 export const logout = () => dispatch => {
+    sessionStorage.clear();
+
     dispatch({ type: LOGOUT });
 };
 

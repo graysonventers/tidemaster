@@ -18,6 +18,17 @@ const Reports = ({ auth: { loading } }) => {
 
     useEffect(() => {
         getContinents();
+
+        if (sessionStorage.getItem('continent')) {
+            setSelectedContinent(sessionStorage.getItem('continent'))
+            getRegions(sessionStorage.getItem('continent'))
+        }
+
+        if (sessionStorage.getItem('region')) {
+            setSelectedRegion(sessionStorage.getItem('region'))
+            getSurfSpots(sessionStorage.getItem('region'))
+        }
+        
     }, []);
 
     // Get continents
@@ -32,7 +43,7 @@ const Reports = ({ auth: { loading } }) => {
     };
    
     // Get regions
-    const getRegions = (continentParam) => {
+    const getRegions  = continentParam => {
         let regionsList = [];
         dataCollection.forEach(item => {
             if (item.continent === continentParam && !regionsList.includes(item.region)) {
@@ -59,6 +70,8 @@ const Reports = ({ auth: { loading } }) => {
         setSurfSpots([]);
         setSelectedContinent(e.target.text);
         getRegions(e.target.text);
+        sessionStorage.setItem('continent', e.target.text);
+        sessionStorage.removeItem('region')
     };
 
     const onClickRegion = e => {
@@ -66,6 +79,7 @@ const Reports = ({ auth: { loading } }) => {
         setSurfSpots([]);
         setSelectedRegion(e.target.text);
         getSurfSpots(e.target.text);
+        sessionStorage.setItem('region', e.target.text);
     };
 
     return loading ? <Loading /> :

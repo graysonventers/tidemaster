@@ -43,6 +43,18 @@
     border: none;
 }
 
+.reportHeader {
+    color: #fff;
+    font-size: 3em;
+    font-weight: 200;
+}
+
+.reportSubheader {
+    color: #fff;
+    font-size: 2em;
+    font-weight: 200;
+}
+
 /* @media (max-width: 500px) {
     .dashboardCard {
         width: 500px;

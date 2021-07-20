@@ -19,7 +19,7 @@ const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getS
     }, [getSurfSpot, match.params.id]);
 
     // eslint-disable-next-line
-    if (!loading && surfSpot === null || surfSpot === undefined) return <Redirect to="/notfound" />
+    if (!loading && surfSpot === null || !loading && surfSpot === undefined) return <Redirect to="/notfound" />
 
     const dayBtnStyle = { 
         margin: '5px',
@@ -32,8 +32,8 @@ const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getS
             <div className="backgroundPrimary">
                 <div className="row">
                     <div className="col s12 center">
-                        <h4>{surfSpot.name}</h4>
-                        <h5>{surfSpot.region}, {surfSpot.continent}</h5>
+                        <h4 className="reportHeader" >{surfSpot.name}</h4>
+                        <h5 className="reportSubheader">{surfSpot.region}, {surfSpot.continent}</h5>
                         {(user !== null) && (user.favoriteSpots &&
                             user.favoriteSpots.includes(surfSpot.surfSpotId.toString()) ? 
                             (<button onClick={() => deleteFavoriteSpot(surfSpot.surfSpotId)} className="center btn btn-small cyan darken-3">Delete from Favorites</button>)
@@ -46,7 +46,7 @@ const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getS
                         <button style={dayBtnStyle} className="btn">Tue 11/24</button>
                         <button style={dayBtnStyle} className="btn">Wed 11/25</button>
                     </div>
-                    <h5>Monday, 11/23/2020</h5>
+                    <h6>Monday, 11/23/2020</h6>
                     <Overview surf={surf}/>
                     <Waves surf={surf}/>
                     <Swell surf={surf}/>

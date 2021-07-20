@@ -8,7 +8,7 @@ const { body, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
 const User = require('../models/User');
 
-// ROUTES WITHIN HERE:
+// ROUTES WITHIN THIS FILE:
     // Register User POST
     // Get all user's favoriteSpots GET 
     // Add favoriteSpot to user model PUT

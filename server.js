@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
     next();
 });
   
-app.use(bodyParser.json());
+app.use(express.json());
 
 const port = process.env.PORT || 5000;
 
