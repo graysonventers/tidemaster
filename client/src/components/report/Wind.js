@@ -8,7 +8,7 @@ const Wind = ({ surf }) => {
 
         let windsArr = [];
         for (let i = 0; i <= 7; i++) {
-            windsArr.push(<span className="col s1" style={windStyle}>{surf.surfSpot.reports[i].wind.speed}</span>);
+            windsArr.push(<span key={surf.surfSpot.reports[i].localTimestamp} className="col s1" style={windStyle}>{surf.surfSpot.reports[i].wind.speed}</span>);
         }
 
     return (

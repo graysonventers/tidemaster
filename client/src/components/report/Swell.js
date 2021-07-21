@@ -13,24 +13,24 @@ const Swell = ({ surf }) => {
 
     for (let i = 0; i <= 7; i++) {
         // primary swell height
-        primarySwell.push(<span className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.primary.height}</span>);
+        primarySwell.push(<span key={surf.surfSpot.reports[i].localTimestamp} className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.primary.height}</span>);
 
         // primary swell direction
-        primarySwellDirection.push(<span className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.primary.compassDirection}</span>);
+        primarySwellDirection.push(<span key={surf.surfSpot.reports[i].localTimestamp} className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.primary.compassDirection}</span>);
 
         // if secondary swell
         if (surf.surfSpot.reports[i].swell.components.secondary) {
-            secondarySwell.push(<span className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.secondary.height}</span>);
+            secondarySwell.push(<span key={surf.surfSpot.reports[i].localTimestamp} className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.secondary.height}</span>);
         } else {
-            secondarySwell.push(<span className="col s1" style={swellStyle}>∙</span>)
+            secondarySwell.push(<span key={i} className="col s1" style={swellStyle}>∙</span>)
         }
         
 
         // if secondary swell direction
         if (surf.surfSpot.reports[i].swell.components.secondary) {
-            secondarySwellDirection.push(<span className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.secondary.compassDirection}</span>);
+            secondarySwellDirection.push(<span key={surf.surfSpot.reports[i].localTimestamp} className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.secondary.compassDirection}</span>);
         } else {
-            secondarySwellDirection.push(<span className="col s1" style={swellStyle}>∙</span>);
+            secondarySwellDirection.push(<span key={i} className="col s1" style={swellStyle}>∙</span>);
         }
         
     }
