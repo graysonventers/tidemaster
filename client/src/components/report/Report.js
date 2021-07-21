@@ -5,7 +5,6 @@ import Overview from '../report/Overview';
 import Waves from '../report/Waves';
 import Swell from '../report/Swell';
 import Wind from '../report/Wind';
-import Tide from '../report/Tide';
 import Loading from '../layout/Loading';
 import { connect } from 'react-redux';
 import { getSurfSpot } from '../../redux/actions/surfSpotActions';
@@ -20,11 +19,6 @@ const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getS
 
     // eslint-disable-next-line
     if (!loading && surfSpot === null || !loading && surfSpot === undefined) return <Redirect to="/notfound" />
-
-    const dayBtnStyle = { 
-        margin: '5px',
-        backgroundColor: '#00838f'
-    };    
 
     return surf.loading ? (<Loading />) : (
         <Fragment>
@@ -41,17 +35,12 @@ const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getS
                     </div>
                 </div>
                 <div className="container">
-                    {/* <div id="reportDayBtn">
-                        <button style={dayBtnStyle} className="btn">Mon 11/23</button>
-                        <button style={dayBtnStyle} className="btn">Tue 11/24</button>
-                        <button style={dayBtnStyle} className="btn">Wed 11/25</button>
-                    </div> */}
-                    {/* <h6>Monday, 11/23/2020</h6> */}
+                    
                     <Overview surf={surf}/>
                     <Waves surf={surf}/>
                     <Swell surf={surf}/>
                     <Wind surf={surf}/>
-                    {/* <Tide surf={surf}/> */}
+                    
                 </div>
             </div>
             <Footer />
