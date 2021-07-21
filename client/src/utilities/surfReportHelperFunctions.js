@@ -1,15 +1,15 @@
 
-// get wave height by spot and timestamp
-export const getWaveHeight = (spot, timeStampIndex) => {
-    const minHeight = spot.reports[0].swell.minBreakingHeight;
-    const maxHeight = spot.reports[0].swell.maxBreakingHeight;
+// get wave height by spot
+export const getWaveHeight = (spot) => {
+    const minHeight = spot.swell.minBreakingHeight;
+    const maxHeight = spot.swell.maxBreakingHeight;
     return `${minHeight} - ${maxHeight}`;
 };
 
-// get wave quality by spot and timestamp
-export const getWaveQuality = (spot, timeStampIndex) => {
-    const fadedRating = spot.reports[0].fadedRating;
-    const solidRating = spot.reports[0].solidRating;
+// get wave quality by spot
+export const getWaveQuality = (spot) => {
+    const fadedRating = spot.fadedRating;
+    const solidRating = spot.solidRating;
     const averageRating = fadedRating + solidRating / 2;
    
     switch (true) {
@@ -25,4 +25,9 @@ export const getWaveQuality = (spot, timeStampIndex) => {
             return 'Hoping for good!';
     }
 };
+
+// celcius to fahrenheit
+export const getFahrenheit = temp => {
+    return (temp * 9/5) + 32;
+}
 
