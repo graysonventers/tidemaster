@@ -51,7 +51,7 @@ const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getS
                     <Waves surf={surf}/>
                     <Swell surf={surf}/>
                     <Wind surf={surf}/>
-                    <Tide surf={surf}/>
+                    {/* <Tide surf={surf}/> */}
                 </div>
             </div>
             <Footer />
