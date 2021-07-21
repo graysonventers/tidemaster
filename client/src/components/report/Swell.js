@@ -1,48 +1,64 @@
 import React from 'react';
 
-const Swell = () => {
+const Swell = ({ surf }) => {
     const swellStyle = {
         marginLeft: '2%',
-        marginRight: '2%'
+        marginRight: '2%',
     };
+
+    const primarySwell = [];
+    const primarySwellDirection = [];
+    const secondarySwell = [];
+    const secondarySwellDirection = [];
+
+    for (let i = 0; i <= 7; i++) {
+        // primary swell height
+        primarySwell.push(<span className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.primary.height}</span>);
+
+        // primary swell direction
+        primarySwellDirection.push(<span className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.primary.compassDirection}</span>);
+
+        // if secondary swell
+        if (surf.surfSpot.reports[i].swell.components.secondary) {
+            secondarySwell.push(<span className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.secondary.height}</span>);
+        } else {
+            secondarySwell.push(<span className="col s1" style={swellStyle}>∙</span>)
+        }
+        
+
+        // if secondary swell direction
+        if (surf.surfSpot.reports[i].swell.components.secondary) {
+            secondarySwellDirection.push(<span className="col s1" style={swellStyle}>{surf.surfSpot.reports[i].swell.components.secondary.compassDirection}</span>);
+        } else {
+            secondarySwellDirection.push(<span className="col s1" style={swellStyle}>∙</span>);
+        }
+        
+    }
 
     return (
         <div>
             <div className="card cardOpacity">
                     <div className="card-content center flow-text">
-                        <span>Swell Direction (ft)</span><br></br>
+                        <span className="section">Swell Direction (ft)</span><br></br>
                         
                         <span>Primary Swell</span>
-                        <div className="row section">
-                            <span className="col s1" style={swellStyle}>2 wnw</span>
-                            <span className="col s1" style={swellStyle}>2 wnw</span>
-                            <span className="col s1" style={swellStyle}>2 wnw</span>
-                            <span className="col s1" style={swellStyle}>2 wnw</span>
-                            <span className="col s1" style={swellStyle}>2 wnw</span>
-                            <span className="col s1" style={swellStyle}>2 wnw</span>
-                            <span className="col s1" style={swellStyle}>2 wnw</span>
-                            <span className="col s1" style={swellStyle}>2 wnw</span>
-                        </div>
-                        <span>Secondary Swell</span>
-                        <div className="row section">
-                            <span className="col s1" style={swellStyle}>2 w</span>
-                            <span className="col s1" style={swellStyle}>2 w</span>
-                            <span className="col s1" style={swellStyle}>2 w</span>
-                            <span className="col s1" style={swellStyle}>2 w</span>
-                            <span className="col s1" style={swellStyle}>2 w</span>
-                            <span className="col s1" style={swellStyle}>2 w</span>
-                            <span className="col s1" style={swellStyle}>2 w</span>
-                            <span className="col s1" style={swellStyle}>2 w</span>
+                        <div className="row">
+                            
+                            {primarySwell.map(item => item)}
+                            
                         </div>
                         <div className="row">
-                            <span className="col s1" style={swellStyle}>12am</span>
-                            <span className="col s1" style={swellStyle}>3am</span>
-                            <span className="col s1" style={swellStyle}>6am</span>
-                            <span className="col s1" style={swellStyle}>9am</span>
-                            <span className="col s1" style={swellStyle}>12pm</span>
-                            <span className="col s1" style={swellStyle}>3pm</span>
-                            <span className="col s1" style={swellStyle}>6pm</span>
-                            <span className="col s1" style={swellStyle}>9pm</span>
+                            {primarySwellDirection.map(item => item)}
+                        </div>
+                        <span>Secondary Swell</span>
+                        <div className="row">
+
+                            {secondarySwell.map(item => item)}
+                            
+
+                        </div>
+                        <div className="row">
+                        {secondarySwellDirection.map(item => item)}
                         </div>
                     </div>
                 </div>
