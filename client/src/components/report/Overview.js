@@ -17,10 +17,10 @@ const Overview = ({ surf: { surfSpot } }) => {
                             <span className="col s3">Air Temp</span>
                         </div>
                         <div className="row">
-                            <span className="col s3">{getWaveHeight(currentReport)}ft</span>
+                            <span className="col s3">{getWaveHeight(currentReport)} ft</span>
                             <span className="col s3">{getWaveQuality(currentReport)}</span>
                             <span className="col s3">{currentReport.wind.speed + ' ' + currentReport.wind.unit}</span>
-                            <span className="col s3">{getFahrenheit(currentReport.condition.temperature) + ' ' + 'f°'}</span>
+                            <span className="col s3">{getFahrenheit(currentReport.condition.temperature)} f°</span>
                         </div>
                     </div>
                 </div>
