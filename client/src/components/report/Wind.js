@@ -1,10 +1,15 @@
 import React from 'react';
 
-const Wind = () => {
+const Wind = ({ surf }) => {
     const windStyle = {
         marginLeft: '2%',
         marginRight: '2%'
     };
+
+        let windsArr = [];
+        for (let i = 0; i <= 7; i++) {
+            windsArr.push(<span className="col s1" style={windStyle}>{surf.surfSpot.reports[i].wind.speed}</span>);
+        }
 
     return (
         <div>
@@ -12,14 +17,7 @@ const Wind = () => {
                     <div className="card-content center flow-text" >
                         <span>Wind (mph)</span>
                         <div className="row section">
-                            <span className="col s1" style={windStyle}>2</span>
-                            <span className="col s1" style={windStyle}>2</span>
-                            <span className="col s1" style={windStyle}>2</span>
-                            <span className="col s1" style={windStyle}>4</span>
-                            <span className="col s1" style={windStyle}>8</span>
-                            <span className="col s1" style={windStyle}>12</span>
-                            <span className="col s1" style={windStyle}>10</span>
-                            <span className="col s1" style={windStyle}>5</span>
+                            {windsArr.map(item => item)}
                         </div>
                         <div className="row">
                             <span className="col s1" style={windStyle}>12am</span>
