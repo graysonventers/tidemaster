@@ -28,6 +28,6 @@ export const getWaveQuality = (spot) => {
 
 // celcius to fahrenheit
 export const getFahrenheit = temp => {
-    return (temp * 9/5) + 32;
+    return Math.round((temp * 9/5) + 32);
 }
 
