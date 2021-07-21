@@ -41,12 +41,12 @@ const Report = ({ auth: { user }, surf, surf: { surfSpot, loading }, match, getS
                     </div>
                 </div>
                 <div className="container">
-                    <div id="reportDayBtn">
+                    {/* <div id="reportDayBtn">
                         <button style={dayBtnStyle} className="btn">Mon 11/23</button>
                         <button style={dayBtnStyle} className="btn">Tue 11/24</button>
                         <button style={dayBtnStyle} className="btn">Wed 11/25</button>
-                    </div>
-                    <h6>Monday, 11/23/2020</h6>
+                    </div> */}
+                    {/* <h6>Monday, 11/23/2020</h6> */}
                     <Overview surf={surf}/>
                     <Waves surf={surf}/>
                     <Swell surf={surf}/>
