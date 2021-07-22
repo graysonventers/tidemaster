@@ -4,7 +4,8 @@
   "description": "A surf report application",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server"
+    "start": "NODE_ENV=production node server",
+    "dev": "nodemon server"
   },
   "author": "Grayson Venters",
   "license": "ISC",
