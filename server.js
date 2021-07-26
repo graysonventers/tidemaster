@@ -3,10 +3,10 @@ const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 const path = require('path');
 
+const app = express();
+
 // connect Database
 connectDB();
-
-const app = express();
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -17,7 +17,7 @@ app.use(function(req, res, next) {
   
 app.use(express.json());
 
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 // Define Routes
 // Register and Login User Routes
@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`)
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`)
 });
 

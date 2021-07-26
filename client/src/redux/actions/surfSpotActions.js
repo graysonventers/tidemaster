@@ -30,7 +30,7 @@ export const getSurfSpot = id => dispatch => {
 export const getSurfSpots = () => async dispatch => {
     const config = {
         method: 'get',
-        url: 'http://localhost:5000/api/users',
+        url: '/api/users',
         headers: {'x-auth-token': [localStorage.token]}
     }
 
