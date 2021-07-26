@@ -18,7 +18,7 @@ export const loadUser = () => async dispatch => {
     
     const config = {
         method: 'get',
-        url: '/api/auth',
+        url: 'https://tidemaster.herokuapp.com/api/auth',
         headers: {'x-auth-token': [localStorage.token]}
     }
 
@@ -62,7 +62,7 @@ export const register = ({ name, email, password }) => async dispatch => {
 export const login = ({ email, password }) => async dispatch => {
     const config = {
         method: 'post',
-        url: 'api/auth',
+        url: 'https://tidemaster.herokuapp.com/api/auth',
         data: { email, password },
         headers: {'Content-Type': 'application/json'}
     };
@@ -96,7 +96,7 @@ export const addFavoriteSpot = id => async dispatch => {
     const stringId = id.toString();
     const config = {
         method: 'put',
-        url: '/api/users',
+        url: 'https://tidemaster.herokuapp.com/api/users',
         data: { favoriteSpots: stringId },
         headers: {
             'x-auth-token': [localStorage.token],
@@ -124,7 +124,7 @@ export const deleteFavoriteSpot = id => async dispatch => {
     const stringId = id.toString();
     const config = {
         method: 'delete',
-        url: '/api/users',
+        url: 'https://tidemaster.herokuapp.com/api/users',
         data: { favoriteSpots: stringId },
         headers: {
             'x-auth-token': [localStorage.token],
