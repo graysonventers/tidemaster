@@ -17,8 +17,6 @@ app.use(function(req, res, next) {
   
 app.use(express.json());
 
-const PORT = process.env.PORT || 5000;
-
 // Define Routes
 // Register and Login User Routes
 app.use('/api/users', require('./routes/users'));
@@ -33,6 +31,8 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })
 }
+
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`)

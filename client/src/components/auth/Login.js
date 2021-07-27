@@ -5,6 +5,7 @@ import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import PropTypes from 'prop-types';
 import { login } from '../../redux/actions/authActions';
+import Loading from '../layout/Loading';
 
 const Login = ({ login, auth }) => {
     const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ const Login = ({ login, auth }) => {
         return <Redirect to='/dashboard' />
     }
 
-    return (
+    return auth.loading ? <Loading /> : (
         <Fragment>
             <Navbar />
             <div className="center backgroundPrimary">

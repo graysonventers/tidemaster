@@ -25,17 +25,17 @@ router.post('/', [
 
     try {
         // Check if user exists
-        const user = await User.findOne({email});
+        let user = await User.findOne({email});
 
         // If user doesn't exist
         if (!user) {
-            res.status(400).json({ message: "User does not exist"})
+            return res.status(400).json({ message: "User does not exist"})
         }
 
         // 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            res.status(400).json({ message: "Incorrect password"})
+            return res.status(400).json({ message: "Incorrect password"})
         }
 
         // create payload for JWT
