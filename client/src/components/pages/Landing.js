@@ -17,7 +17,7 @@ const Landing = ({ auth }) => {
             <Navbar />
             <div className="center backgroundPrimary">
                 <section className="container section large text-center" style={{ padding: '10%' }}>
-                    <h1 className="h1 white-text">
+                    <h1 className="h1 white-text" style={{ fontWeight: '100' }}>
                         TideMaster
                     </h1>
                     <Link to="/register" className="btn cyan darken-3">Register</Link>
